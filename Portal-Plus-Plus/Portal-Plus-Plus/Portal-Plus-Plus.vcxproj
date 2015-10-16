@@ -146,13 +146,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gravity_obj.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="posn.cpp" />
+    <ClCompile Include="velocity.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gravity_obj.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="posn.h" />
+    <ClInclude Include="velocity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

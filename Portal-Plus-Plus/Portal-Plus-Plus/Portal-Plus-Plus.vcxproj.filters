@@ -24,12 +24,24 @@
     <ClCompile Include="posn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="velocity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gravity_obj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="posn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="velocity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gravity_obj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

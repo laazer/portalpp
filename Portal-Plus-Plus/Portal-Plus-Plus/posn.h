@@ -1,10 +1,12 @@
 #pragma once
+#include "velocity.h"
 
 // represents a position on screen in pixel coordinates
 class Posn {
 public:
-	// constructor
-	Posn(int x, int y) : x(x), y(y) { }
+	// constructors
+	Posn() = default;
+	Posn(int x, int y) : m_x(x), m_y(y) { }
 
 	// return this Posn's x and y coordinates respectively
 	int getX();
@@ -20,6 +22,9 @@ public:
 	// move this posn by some fixed amounts dx and dy
 	void move(int dx, int dy);
 
+	// move this posn by the velocity vector for one time unit
+	void move(Velocity v);
+
 	// return true if this posn is within dx and dy of this given Posn
 	bool isWithin(Posn * p, int dx, int dy);
 
@@ -28,6 +33,6 @@ public:
 	friend bool operator!=(const Posn & p1, const Posn & p2);
 
 private:
-	int x;
-	int y;
+	int m_x;
+	int m_y;
 };
