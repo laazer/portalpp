@@ -3,8 +3,10 @@
 #include "gravity_obj.h"
 
 
-class Player : GravityObject {
+class Player : public GravityObject {
 public:
+	// constructors
+	Player(Posn p);
 
 private:
 

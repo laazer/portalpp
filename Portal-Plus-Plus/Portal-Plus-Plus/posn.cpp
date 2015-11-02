@@ -8,20 +8,20 @@ int Posn::getY() {
 	return m_y;
 }
 
-void Posn::setX(int x) {
+void Posn::setX(double x) {
 	this->m_x = x;
 }
 
-void Posn::setY(int y) {
+void Posn::setY(double y) {
 	this->m_y = y;
 }
 
-void Posn::set(int x, int y) {
+void Posn::set(double x, double y) {
 	setX(x);
 	setY(y);
 }
 
-void Posn::move(int dx, int dy) {
+void Posn::move(double dx, double dy) {
 	set(getX() + dx, getY() + dy);
 }
 
@@ -29,7 +29,7 @@ void Posn::move(Velocity v) {
 	set(getX() + v.getX(), getY() + v.getY());
 }
 
-bool Posn::isWithin(Posn * p, int dx, int dy) {
+bool Posn::isWithin(Posn * p, double dx, double dy) {
 	return (p->getX() - this->getX() <= dx)
 		|| (p->getY() - this->getY() <= dy);
 }

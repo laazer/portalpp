@@ -6,27 +6,27 @@ class Posn {
 public:
 	// constructors
 	Posn() = default;
-	Posn(int x, int y) : m_x(x), m_y(y) { }
+	Posn(double x, double y) : m_x(x), m_y(y) { }
 
 	// return this Posn's x and y coordinates respectively
 	int getX();
 	int getY();
 	
 	// change this Posn's x and y coordinates respectively
-	void setX(int x);
-	void setY(int y);
+	void setX(double x);
+	void setY(double y);
 	
 	// change both the x and y coordinates of this Posn
-	void set(int x, int y);
+	void set(double x, double y);
 
 	// move this posn by some fixed amounts dx and dy
-	void move(int dx, int dy);
+	void move(double dx, double dy);
 
 	// move this posn by the velocity vector for one time unit
 	void move(Velocity v);
 
 	// return true if this posn is within dx and dy of this given Posn
-	bool isWithin(Posn * p, int dx, int dy);
+	bool isWithin(Posn * p, double dx, double dy);
 
 	// overload operators
 	friend bool operator==(const Posn & p1, const Posn & p2);
