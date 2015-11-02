@@ -150,9 +150,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="posn.cpp" />
+    <ClCompile Include="game_object.cpp" />
     <ClCompile Include="velocity.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="game_object.h" />
     <ClInclude Include="gravity_obj.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="posn.h" />

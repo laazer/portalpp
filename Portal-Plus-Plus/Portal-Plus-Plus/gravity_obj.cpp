@@ -1,8 +1,7 @@
 #include "gravity_obj.h"
 
-GravityObject::GravityObject(Posn & p) {
+GravityObject::GravityObject(int height, int width, Posn & p) : GameObject(height, width, p) {
 	m_velocity = Velocity(0, 0);
-	m_pos = p;
 }
 
 
