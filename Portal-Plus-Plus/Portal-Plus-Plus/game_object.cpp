@@ -24,10 +24,9 @@ bool operator!=(const GameObject & g1, const GameObject & g2) {
 }
 
 bool GameObject::hasCollided(GameObject & g) {
-	//TODO
 	return false;
 }
 
 void GameObject::move(Velocity v) {
-	
+	//TODODTODODODODO
 }
