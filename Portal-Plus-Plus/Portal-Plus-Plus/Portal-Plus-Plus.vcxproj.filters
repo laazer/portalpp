@@ -37,7 +37,13 @@
       <Filter>model\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="game_object.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wall_block.cpp">
+      <Filter>model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="level_map.cpp">
+      <Filter>model\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -54,7 +60,13 @@
       <Filter>model\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game_object.h">
-      <Filter>Header Files</Filter>
+      <Filter>model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="level_map.h">
+      <Filter>model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wall_block.h">
+      <Filter>model\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,6 +8,7 @@ using namespace std;
 
 class GameObject {
 	public:
+		GameObject() = default;
 		GameObject(int height, int width, Posn & p); //square object constructor
 		GameObject(GameObject & g); // copy constructor
 		//returns true if 2 game objects have collided
@@ -19,11 +20,12 @@ class GameObject {
 		void setImage(string path);
 		
 	protected:
-	
-	private:
 		int m_height; //in pixels
 		int m_width; //in pixels
 		Posn m_pos;
+
+	private:
+		
 		//the file path to the object's image reresentation, subject to change
 		string image_name;
 

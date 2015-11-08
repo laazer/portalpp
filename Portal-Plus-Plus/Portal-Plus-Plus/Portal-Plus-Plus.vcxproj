@@ -155,18 +155,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="gravity_obj.cpp" />
+    <ClCompile Include="level_map.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="posn.cpp" />
     <ClCompile Include="game_object.cpp" />
     <ClCompile Include="velocity.cpp" />
+    <ClCompile Include="wall_block.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_object.h" />
     <ClInclude Include="gravity_obj.h" />
+    <ClInclude Include="level_map.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="posn.h" />
     <ClInclude Include="velocity.h" />
+    <ClInclude Include="wall_block.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,4 @@
 #include "player.h"
 
-Player::Player(Posn p) : GravityObject(p) {
+Player::Player(Posn p) {
 }
