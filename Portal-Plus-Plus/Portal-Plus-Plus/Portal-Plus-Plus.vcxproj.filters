@@ -19,6 +19,12 @@
     <Filter Include="view">
       <UniqueIdentifier>{09e65077-3561-44f1-9817-1a3000f7fd89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="view\Header Files">
+      <UniqueIdentifier>{ae101bf0-7299-48b4-9c11-8105bad02b6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\Source Files">
+      <UniqueIdentifier>{6a73344c-5c8a-4e4f-962b-0f6498d4b791}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,6 +51,9 @@
     <ClCompile Include="level_map.cpp">
       <Filter>model\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="level_view.cpp">
+      <Filter>view\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -67,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="wall_block.h">
       <Filter>model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="level_view.h">
+      <Filter>view\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

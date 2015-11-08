@@ -18,6 +18,11 @@ class GameObject {
 		//moves a game object by the velocity vector
 		void move(Velocity v);
 		void setImage(string path);
+		// returns the width/height of this object
+		int getWidth();
+		int getHeight();
+		// returns the position of this object
+		Posn getPosn();
 		
 	protected:
 		int m_height; //in pixels

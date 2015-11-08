@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="gravity_obj.cpp" />
+    <ClCompile Include="level_view.cpp" />
     <ClCompile Include="level_map.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
@@ -166,6 +167,7 @@
   <ItemGroup>
     <ClInclude Include="game_object.h" />
     <ClInclude Include="gravity_obj.h" />
+    <ClInclude Include="level_view.h" />
     <ClInclude Include="level_map.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="posn.h" />

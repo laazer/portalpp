@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 //#include "player.h"
-#include "level_map.h"
+#include "level_view.h"
 #define CANVAS_WIDTH 800
 #define CANVAS_HEIGHT 600
 
@@ -33,7 +33,8 @@ int main()
 	walls.push_back(top);
 	walls.push_back(b1);
 	walls.push_back(b2);
-	LevelMap level = LevelMap(walls, CANVAS_WIDTH, CANVAS_HEIGHT);
+	LevelMap level_map = LevelMap(walls, CANVAS_WIDTH, CANVAS_HEIGHT);
+	LevelView view = LevelView(level_map);
 	/*
 	Player player = Player(Posn(400, 0));
 	sf::CircleShape shape(100.f);
@@ -54,7 +55,7 @@ int main()
 		}
 
 		window.clear();
-		level.draw(window);
+		view.render(window);
 		window.display();
 	}
 

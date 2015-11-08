@@ -9,9 +9,6 @@ public:
 	// constructor
 	WallBlock(int width, int height, Posn & p);
 	WallBlock(const WallBlock & wb);
-	
-	void draw(sf::RenderWindow & canvas);
-
 
 private:
 

@@ -6,13 +6,14 @@ LevelMap::LevelMap(std::vector<WallBlock> blocks, int width, int height) {
 	this->m_height = height;
 }
 
-void LevelMap::draw(sf::RenderWindow & canvas) {
-	sf::RectangleShape bg(sf::Vector2f(m_width, m_height));
-	bg.setFillColor(LEVEL_COLOR);
-	bg.setPosition(0, 0);
-	canvas.draw(bg);
+std::vector<WallBlock> LevelMap::getBlocks() {
+	return m_blocks;
+}
 
-	for (int i = 0; i < m_blocks.size(); ++i) {
-		m_blocks.at(i).draw(canvas);
-	}
+int LevelMap::getWidth() {
+	return m_width;
+}
+
+int LevelMap::getHeight() {
+	return m_height;
 }

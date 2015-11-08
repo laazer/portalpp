@@ -8,9 +8,13 @@ class LevelMap {
 public:
 	LevelMap() = default;
 	LevelMap(std::vector<WallBlock> blocks, int width, int height);
-	// adds all of the necessary shapes to draw this map to the
-	// end of the given vector
-	void draw(sf::RenderWindow & canvas);
+	
+	// return the vector of WallBlocks in this level
+	std::vector<WallBlock> getBlocks();
+
+	// return this width/height of this level
+	int getWidth();
+	int getHeight();
 
 private:
 	std::vector<WallBlock> m_blocks;
