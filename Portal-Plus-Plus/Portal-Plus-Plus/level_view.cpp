@@ -1,7 +1,15 @@
 #include "level_view.h"
+#include <iostream>
 
 LevelView::LevelView(LevelMap & level) {
 	this->m_level = level;
+	this->m_target_image = new sf::Texture();
+	m_target_image->loadFromFile(ASSETS_DIR TARGET_IMAGE, sf::IntRect());
+	m_target_image->setSmooth(true);
+}
+
+LevelView::~LevelView() {
+	delete m_target_image;
 }
 
 void LevelView::render(sf::RenderWindow & canvas) {
@@ -20,4 +28,11 @@ void LevelView::render(sf::RenderWindow & canvas) {
 		rect.setPosition(sf::Vector2f(block.getPosn().getX(), block.getPosn().getY()));
 		canvas.draw(rect);
 	}
+
+	sf::Sprite target_sprite;
+	target_sprite.setTexture(*m_target_image);
+	target_sprite.setPosition(sf::Vector2f(
+		m_level.getTarget().getX(), m_level.getTarget().getY()));
+	canvas.draw(target_sprite);
+
 }

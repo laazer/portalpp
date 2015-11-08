@@ -33,7 +33,7 @@ int main()
 	walls.push_back(top);
 	walls.push_back(b1);
 	walls.push_back(b2);
-	LevelMap level_map = LevelMap(walls, CANVAS_WIDTH, CANVAS_HEIGHT);
+	LevelMap level_map = LevelMap(walls, CANVAS_WIDTH, CANVAS_HEIGHT, Posn(60, 160));
 	LevelView view = LevelView(level_map);
 	/*
 	Player player = Player(Posn(400, 0));
