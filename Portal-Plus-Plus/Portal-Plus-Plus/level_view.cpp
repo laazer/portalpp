@@ -47,7 +47,7 @@ void LevelView::render(sf::RenderWindow & canvas) {
 	// render the crosshair onto the canvas
 	sf::Sprite crosshair;
 	crosshair.setTexture(*m_crosshair_image);
-	sf::Vector2u size(m_crosshair_image->getSize());
+	sf::Vector2i size(m_crosshair_image->getSize());
 	crosshair.setPosition(m_mouse.getX() - (size.x / 2),
 		m_mouse.getY() - (size.y / 2));
 	canvas.draw(crosshair);
