@@ -18,6 +18,7 @@ int main()
 
 
 	sf::RenderWindow window(sf::VideoMode(CANVAS_WIDTH, CANVAS_HEIGHT), "Portal++");
+	window.setMouseCursorVisible(false);
 
 	WallBlock bottom(800, 40, Posn(0, 560));
 	WallBlock left(40, 600, Posn(0, 0));
@@ -54,6 +55,8 @@ int main()
 			}
 		}
 
+		sf::Vector2i mouse_coords = sf::Mouse::getPosition(window);
+		view.updateMouse(Posn(mouse_coords.x, mouse_coords.y));
 		window.clear();
 		view.render(window);
 		window.display();

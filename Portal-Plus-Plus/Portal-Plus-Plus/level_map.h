@@ -24,4 +24,5 @@ private:
 	int m_height;
 	int m_width;
 	Posn m_target; // the location of the the target door
+	Posn m_mouse;
 };
