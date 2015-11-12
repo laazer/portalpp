@@ -1,6 +1,7 @@
-#pragma once
+#ifndef WALL_BLOCK_H
+#define WALL_BLOCK_H
 #include "game_object.h"
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #define WALL_COLOR sf::Color(0, 0, 0)
 
 
@@ -13,3 +14,5 @@ public:
 private:
 
 };
+
+#endif

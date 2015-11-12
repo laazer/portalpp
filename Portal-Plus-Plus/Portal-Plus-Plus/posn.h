@@ -1,4 +1,5 @@
-#pragma once
+#ifndef POSN_H
+#define POSN_H
 #include "velocity.h"
 
 // represents a position on screen in pixel coordinates
@@ -36,3 +37,5 @@ private:
 	int m_x;
 	int m_y;
 };
+
+#endif

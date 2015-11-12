@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VELOCITY_H
+#define VELOCITY_H
 
 // represents a velocity with a magnitude in x and y directions
 class Velocity {
@@ -24,3 +25,5 @@ private:
 	double m_x_vel;
 	double m_y_vel;
 };
+
+#endif

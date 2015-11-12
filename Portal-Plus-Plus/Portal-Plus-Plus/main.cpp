@@ -20,13 +20,19 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(CANVAS_WIDTH, CANVAS_HEIGHT), "Portal++");
 	window.setMouseCursorVisible(false);
 
-	WallBlock bottom(800, 40, Posn(0, 560));
-	WallBlock left(40, 600, Posn(0, 0));
-	WallBlock right(40, 600, Posn(760, 0));
-	WallBlock top(800, 40, Posn(0, 0));
+	Posn p1 = Posn(0, 560);
+	WallBlock bottom(800, 40, p1);
+	Posn p2 = Posn(0, 0);
+	WallBlock left(40, 600, p2);
+	Posn p3 = Posn(760, 0);
+	WallBlock right(40, 600, p3);
+	Posn p4 = Posn(0, 0);
+	WallBlock top(800, 40, p4);
 
-	WallBlock b1(240, 340, Posn(0, 260));
-	WallBlock b2(50, 425, Posn(540, 0));
+	Posn p5 = Posn(0, 260);
+	WallBlock b1(240, 340, p5);
+	Posn p6 = Posn(540, 0);
+	WallBlock b2(50, 425, p6);
 	std::vector<WallBlock> walls = std::vector<WallBlock>();
 	walls.push_back(bottom);
 	walls.push_back(left);
@@ -34,7 +40,8 @@ int main()
 	walls.push_back(top);
 	walls.push_back(b1);
 	walls.push_back(b2);
-	LevelMap level_map = LevelMap(walls, CANVAS_WIDTH, CANVAS_HEIGHT, Posn(60, 160));
+	Posn p7 = Posn(60, 160);
+	LevelMap level_map = LevelMap(walls, CANVAS_WIDTH, CANVAS_HEIGHT, p7);
 	LevelView view = LevelView(level_map);
 	/*
 	Player player = Player(Posn(400, 0));
@@ -56,7 +63,8 @@ int main()
 		}
 
 		sf::Vector2i mouse_coords = sf::Mouse::getPosition(window);
-		view.updateMouse(Posn(mouse_coords.x, mouse_coords.y));
+		Posn p8 = Posn(mouse_coords.x, mouse_coords.y);
+		view.updateMouse(p8);
 		window.clear();
 		view.render(window);
 		window.display();

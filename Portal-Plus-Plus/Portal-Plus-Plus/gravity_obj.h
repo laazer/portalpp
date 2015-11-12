@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GRAVITY_OBJ_H
+#define GRAVITY_OBJ_H
 #include "velocity.h"
 #include "posn.h"
 #include "game_object.h"
@@ -21,3 +22,5 @@ protected:
 private:
 	Velocity m_velocity;
 };
+
+#endif

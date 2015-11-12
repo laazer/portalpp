@@ -1,7 +1,8 @@
-#pragma once
+#ifndef LEVEL_MAP_H
+#define LEVEL_MAP_H
 #include <vector>
 #include "wall_block.h"
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #define LEVEL_COLOR sf::Color(153, 204, 255)
 
 class LevelMap {
@@ -26,3 +27,5 @@ private:
 	Posn m_target; // the location of the the target door
 	Posn m_mouse;
 };
+
+#endif

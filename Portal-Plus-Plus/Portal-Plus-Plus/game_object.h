@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAME_OBJECT_H
+#define GAME_OBJECT_H
 #include <string>
 #include "posn.h"
 #include "velocity.h"
@@ -36,3 +37,5 @@ class GameObject {
 
 		
 };
+
+#endif

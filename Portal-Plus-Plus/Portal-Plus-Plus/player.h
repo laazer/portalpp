@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 #include "posn.h"
 #include "gravity_obj.h"
 
@@ -11,3 +12,5 @@ public:
 private:
 
 };
+
+#endif
