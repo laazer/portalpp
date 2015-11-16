@@ -6,11 +6,13 @@ GameObject::GameObject(int height, int width, Posn & p) {
 	m_pos = p;
 	image_name = "";
 }
-
+/*
 GameObject::GameObject(GameObject & o) {
-
+	m_height = o.m_height;
+	m_width = o.m_width;
+	m_pos = o.m_pos;
 }
-
+*/
 void GameObject::setImage(string s) {
 	this->image_name = s;
 }

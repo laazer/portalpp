@@ -28,6 +28,9 @@
     <Filter Include="assets">
       <UniqueIdentifier>{892d3a69-3bbd-4501-b58b-3db8842195a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="controller">
+      <UniqueIdentifier>{8d1d44d4-9301-404c-ad73-db682d6eee9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,6 +60,12 @@
     <ClCompile Include="level_view.cpp">
       <Filter>view\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="key_handler.cpp">
+      <Filter>controller</Filter>
+    </ClCompile>
+    <ClCompile Include="game_model.cpp">
+      <Filter>model\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -82,6 +91,12 @@
     </ClInclude>
     <ClInclude Include="level_view.h">
       <Filter>view\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="key_handler.h">
+      <Filter>controller</Filter>
+    </ClInclude>
+    <ClInclude Include="game_model.h">
+      <Filter>model\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

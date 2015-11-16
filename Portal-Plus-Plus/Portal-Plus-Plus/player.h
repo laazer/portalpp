@@ -7,6 +7,7 @@
 class Player : public GravityObject {
 public:
 	// constructors
+	Player() = default;
 	Player(Posn p);
 
 private:

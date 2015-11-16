@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <fstream>
-//#include "player.h"
+#include "game_model.h"
 #include "level_view.h"
 #define CANVAS_WIDTH 800
 #define CANVAS_HEIGHT 600
@@ -42,7 +42,10 @@ int main()
 	walls.push_back(b2);
 	Posn p7 = Posn(60, 160);
 	LevelMap level_map = LevelMap(walls, CANVAS_WIDTH, CANVAS_HEIGHT, p7);
-	LevelView view = LevelView(level_map);
+	std::vector<GameObject> objects = std::vector<GameObject>();
+	Player player = Player(Posn(0, 0));
+	GameModel model = GameModel(level_map, objects, player);
+	LevelView view = LevelView(model);
 	/*
 	Player player = Player(Posn(400, 0));
 	sf::CircleShape shape(100.f);
@@ -59,6 +62,9 @@ int main()
 			}
 			if (event.type == sf::Event::MouseButtonPressed) {
 				window.close();
+			}
+			if (event.type == sf::Event::KeyPressed) {
+				std::cout << event.key.code << std::endl;
 			}
 		}
 

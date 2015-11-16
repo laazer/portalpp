@@ -2,8 +2,10 @@
 #include <iostream>
 #include <math.h>
 
-LevelView::LevelView(LevelMap & level) {
-	this->m_level = level;
+LevelView::LevelView(GameModel & model) {
+	this->m_model = model;
+	this->m_level = *model.getLevel();
+	this->m_player = *model.getPlayer();
 	this->m_mouse = Posn(-100, -100); // start the mouse off the screen
 	this->m_target_image = new sf::Texture();
 	m_target_image->loadFromFile(ASSETS_DIR TARGET_IMAGE, sf::IntRect());
@@ -11,10 +13,15 @@ LevelView::LevelView(LevelMap & level) {
 	this->m_crosshair_image = new sf::Texture();
 	m_crosshair_image->loadFromFile(ASSETS_DIR CROSSHAIR_IMAGE, sf::IntRect());
 	m_crosshair_image->setSmooth(true);
+	this->m_player_image = new sf::Texture();
+	m_player_image->loadFromFile(ASSETS_DIR PLAYER_IMAGE, sf::IntRect());
+	m_player_image->setSmooth(true);
 }
 
 LevelView::~LevelView() {
 	delete m_target_image;
+	delete m_crosshair_image;
+	delete m_player_image;
 }
 
 void LevelView::updateMouse(Posn & p) {
@@ -43,6 +50,14 @@ void LevelView::render(sf::RenderWindow & canvas) {
 	target_sprite.setTexture(*m_target_image);
 	target_sprite.setPosition(m_level.getTarget().getX(), m_level.getTarget().getY());
 	canvas.draw(target_sprite);
+
+	// render the player onto the canvas
+	sf::Sprite player_sprite;
+	player_sprite.setTexture(*m_player_image);
+	std::cout << m_player.getPos().getX() << "foo" << m_player.getPos().getY() << std::endl;
+	player_sprite.setPosition(500, 500);
+	canvas.draw(player_sprite);
+
 
 	// render the crosshair onto the canvas
 	sf::Sprite crosshair;

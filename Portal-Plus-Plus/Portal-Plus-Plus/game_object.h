@@ -11,7 +11,7 @@ class GameObject {
 	public:
 		GameObject() = default;
 		GameObject(int height, int width, Posn & p); //square object constructor
-		GameObject(GameObject & g); // copy constructor
+		//GameObject(GameObject & g); // copy constructor
 		//returns true if 2 game objects have collided
 		bool hasCollided(GameObject & g);
 		friend bool operator ==(const GameObject & g1, const GameObject & g2);

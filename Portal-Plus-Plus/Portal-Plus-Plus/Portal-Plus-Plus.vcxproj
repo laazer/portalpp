@@ -155,9 +155,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="gravity_obj.cpp" />
+    <ClCompile Include="key_handler.cpp" />
     <ClCompile Include="level_view.cpp" />
     <ClCompile Include="level_map.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="game_model.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="posn.cpp" />
     <ClCompile Include="game_object.cpp" />
@@ -167,8 +169,10 @@
   <ItemGroup>
     <ClInclude Include="game_object.h" />
     <ClInclude Include="gravity_obj.h" />
+    <ClInclude Include="key_handler.h" />
     <ClInclude Include="level_view.h" />
     <ClInclude Include="level_map.h" />
+    <ClInclude Include="game_model.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="posn.h" />
     <ClInclude Include="velocity.h" />
