@@ -41,11 +41,14 @@ int main()
 	walls.push_back(b1);
 	walls.push_back(b2);
 	Posn p7 = Posn(60, 160);
+	std::cout << p7.getX() << " " << p7.getY() << std::endl;
 	LevelMap level_map = LevelMap(walls, CANVAS_WIDTH, CANVAS_HEIGHT, p7);
 	std::vector<GameObject> objects = std::vector<GameObject>();
-	Player player = Player(Posn(0, 0));
+	Player player = Player(Posn(100.0, 170.0));
+	player.updateVel(0.15, -0.35);
+	std::cout << player.getPosn().getX() << " " << player.getPosn().getY() << std::endl;
 	GameModel model = GameModel(level_map, objects, player);
-	LevelView view = LevelView(model);
+	LevelView view = LevelView(&model);
 	/*
 	Player player = Player(Posn(400, 0));
 	sf::CircleShape shape(100.f);
@@ -67,7 +70,7 @@ int main()
 				std::cout << event.key.code << std::endl;
 			}
 		}
-
+		model.onTick();
 		sf::Vector2i mouse_coords = sf::Mouse::getPosition(window);
 		Posn p8 = Posn(mouse_coords.x, mouse_coords.y);
 		view.updateMouse(p8);

@@ -1,10 +1,10 @@
 #include "posn.h"
 
-int Posn::getX() {
+double Posn::getX() {
 	return m_x;
 }
 
-int Posn::getY() {
+double Posn::getY() {
 	return m_y;
 }
 

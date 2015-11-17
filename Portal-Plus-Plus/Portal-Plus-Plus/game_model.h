@@ -11,7 +11,7 @@
 class GameModel {
 public:
 	GameModel() = default;
-	GameModel(LevelMap & level, std::vector<GameObject> objects, Player player);
+	GameModel(LevelMap & level, std::vector<GameObject> objects, Player & player);
 	
 	// gets the level associated with this model
 	LevelMap * getLevel();

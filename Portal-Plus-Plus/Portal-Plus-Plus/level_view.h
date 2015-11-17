@@ -16,13 +16,13 @@ class LevelView {
 public:
 	LevelView() = default;
 	~LevelView();
-	LevelView(GameModel & model);
+	LevelView(GameModel * model);
 	void render(sf::RenderWindow & canvas);
 	void updateMouse(Posn & p);
 private:
-	GameModel m_model;
-	LevelMap m_level;
-	Player m_player;
+	GameModel * m_model;
+	LevelMap * m_level;
+	Player * m_player;
 	sf::Texture * m_target_image;
 	Posn m_mouse;
 	sf::Texture * m_crosshair_image;

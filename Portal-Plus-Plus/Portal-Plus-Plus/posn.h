@@ -10,8 +10,8 @@ public:
 	Posn(double x, double y) : m_x(x), m_y(y) { }
 
 	// return this Posn's x and y coordinates respectively
-	int getX();
-	int getY();
+	double getX();
+	double getY();
 	
 	// change this Posn's x and y coordinates respectively
 	void setX(double x);
@@ -34,8 +34,8 @@ public:
 	friend bool operator!=(const Posn & p1, const Posn & p2);
 
 private:
-	int m_x;
-	int m_y;
+	double m_x;
+	double m_y;
 };
 
 #endif

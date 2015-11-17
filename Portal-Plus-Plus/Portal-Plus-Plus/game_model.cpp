@@ -1,8 +1,8 @@
 #include "game_model.h"
 #include <stdlib.h>
+#include <iostream>
 
-
-GameModel::GameModel(LevelMap & level, std::vector<GameObject> objects, Player player) :
+GameModel::GameModel(LevelMap & level, std::vector<GameObject> objects, Player & player) :
 	m_level(level), m_objects(objects), m_player(player) { }
 
 LevelMap * GameModel::getLevel() {
@@ -25,5 +25,8 @@ GameModel * GameModel::movePlayer(bool moveRight) {
 }
 
 void GameModel::onTick() {
-	m_player.move(m_player.getVelocity());
+	m_player.applyGravity();
+	std::cout << m_player.getVelocity().getY() << std::endl;
+	m_player.updatePos();
+	std::cout << m_player.getPosn().getX() << " " << m_player.getPosn().getY() << std::endl;
 }

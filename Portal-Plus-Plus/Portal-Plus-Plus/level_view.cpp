@@ -2,10 +2,10 @@
 #include <iostream>
 #include <math.h>
 
-LevelView::LevelView(GameModel & model) {
+LevelView::LevelView(GameModel * model) {
 	this->m_model = model;
-	this->m_level = *model.getLevel();
-	this->m_player = *model.getPlayer();
+	this->m_level = model->getLevel();
+	this->m_player = model->getPlayer();
 	this->m_mouse = Posn(-100, -100); // start the mouse off the screen
 	this->m_target_image = new sf::Texture();
 	m_target_image->loadFromFile(ASSETS_DIR TARGET_IMAGE, sf::IntRect());
@@ -30,13 +30,13 @@ void LevelView::updateMouse(Posn & p) {
 
 void LevelView::render(sf::RenderWindow & canvas) {
 	// first render the background onto the canvas
-	sf::RectangleShape bg(sf::Vector2f(m_level.getWidth(), m_level.getHeight()));
+	sf::RectangleShape bg(sf::Vector2f(m_level->getWidth(), m_level->getHeight()));
 	bg.setFillColor(LEVEL_COLOR);
 	bg.setPosition(0, 0);
 	canvas.draw(bg);
 
 	// render all of the WallBlocks on top of the background
-	std::vector<WallBlock> blocks = m_level.getBlocks();
+	std::vector<WallBlock> blocks = m_level->getBlocks();
 	for (int i = 0; i < blocks.size(); ++i) {
 		WallBlock block = blocks.at(i);
 		sf::RectangleShape rect(sf::Vector2f(block.getWidth(), block.getHeight()));
@@ -48,14 +48,14 @@ void LevelView::render(sf::RenderWindow & canvas) {
 	// render the exit target onto the canvas
 	sf::Sprite target_sprite;
 	target_sprite.setTexture(*m_target_image);
-	target_sprite.setPosition(m_level.getTarget().getX(), m_level.getTarget().getY());
+	target_sprite.setPosition(m_level->getTarget().getX(), m_level->getTarget().getY());
 	canvas.draw(target_sprite);
 
 	// render the player onto the canvas
 	sf::Sprite player_sprite;
 	player_sprite.setTexture(*m_player_image);
-	std::cout << m_player.getPos().getX() << "foo" << m_player.getPos().getY() << std::endl;
-	player_sprite.setPosition(500, 500);
+	std::cout << "POSITION: " << m_player->getPosn().getX() + 0.1 << " " << m_player->getPosn().getY() << std::endl;
+	player_sprite.setPosition(m_player->getPosn().getX(), m_player->getPosn().getY());
 	canvas.draw(player_sprite);
 
 
