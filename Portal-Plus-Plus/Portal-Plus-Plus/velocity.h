@@ -15,8 +15,8 @@ public:
 	const double getY();
 
 	// set the x and y coordinates of this velocity independently and return this Velocity
-	Velocity setX(double d);
-	Velocity setY(double d);
+	Velocity * setX(double d);
+	Velocity * setY(double d);
 
 	// element-wise assignment between velocities
 	Velocity operator=(Velocity & v);

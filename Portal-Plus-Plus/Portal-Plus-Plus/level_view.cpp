@@ -41,7 +41,7 @@ void LevelView::render(sf::RenderWindow & canvas) {
 		WallBlock block = blocks.at(i);
 		sf::RectangleShape rect(sf::Vector2f(block.getWidth(), block.getHeight()));
 		rect.setFillColor(WALL_COLOR);
-		rect.setPosition(sf::Vector2f(block.getPosn().getX(), block.getPosn().getY()));
+		rect.setPosition(sf::Vector2f(block.getPosn()->getX(), block.getPosn()->getY()));
 		canvas.draw(rect);
 	}
 
@@ -54,8 +54,8 @@ void LevelView::render(sf::RenderWindow & canvas) {
 	// render the player onto the canvas
 	sf::Sprite player_sprite;
 	player_sprite.setTexture(*m_player_image);
-	std::cout << "POSITION: " << m_player->getPosn().getX() + 0.1 << " " << m_player->getPosn().getY() << std::endl;
-	player_sprite.setPosition(m_player->getPosn().getX(), m_player->getPosn().getY());
+	std::cout << "POSITION: " << m_player->getPosn()->getX() + 0.1 << " " << m_player->getPosn()->getY() << std::endl;
+	player_sprite.setPosition(m_player->getPosn()->getX(), m_player->getPosn()->getY());
 	canvas.draw(player_sprite);
 
 

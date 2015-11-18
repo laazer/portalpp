@@ -16,8 +16,10 @@ Velocity GravityObject::getVelocity() {
 	return m_velocity;
 }
 
-Posn GravityObject::updatePos() {
-	m_pos.move(m_velocity);
+Posn GravityObject::updatePos(bool onGround) {
+	if (!onGround) {
+		m_pos.move(m_velocity);
+	}
 	return m_pos;
 }
 

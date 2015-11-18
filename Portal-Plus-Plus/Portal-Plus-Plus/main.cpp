@@ -3,6 +3,7 @@
 #include <fstream>
 #include "game_model.h"
 #include "level_view.h"
+#include "key_handler.h"
 #define CANVAS_WIDTH 800
 #define CANVAS_HEIGHT 600
 
@@ -44,11 +45,12 @@ int main()
 	std::cout << p7.getX() << " " << p7.getY() << std::endl;
 	LevelMap level_map = LevelMap(walls, CANVAS_WIDTH, CANVAS_HEIGHT, p7);
 	std::vector<GameObject> objects = std::vector<GameObject>();
-	Player player = Player(Posn(100.0, 170.0));
-	player.updateVel(0.15, -0.35);
-	std::cout << player.getPosn().getX() << " " << player.getPosn().getY() << std::endl;
+	Player player = Player(Posn(100.0, 160.0));
+	player.updateVel(0.15, -0.45);
+	std::cout << player.getPosn()->getX() << " " << player.getPosn()->getY() << std::endl;
 	GameModel model = GameModel(level_map, objects, player);
 	LevelView view = LevelView(&model);
+	KeyHandler kh = KeyHandler(&model);
 	/*
 	Player player = Player(Posn(400, 0));
 	sf::CircleShape shape(100.f);
@@ -67,9 +69,10 @@ int main()
 				window.close();
 			}
 			if (event.type == sf::Event::KeyPressed) {
-				std::cout << event.key.code << std::endl;
+				kh.handleEvent(event);
 			}
 		}
+		kh.handleKey();
 		model.onTick();
 		sf::Vector2i mouse_coords = sf::Mouse::getPosition(window);
 		Posn p8 = Posn(mouse_coords.x, mouse_coords.y);

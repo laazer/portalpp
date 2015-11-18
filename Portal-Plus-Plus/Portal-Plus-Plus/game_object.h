@@ -23,7 +23,7 @@ class GameObject {
 		int getWidth();
 		int getHeight();
 		// returns the position of this object
-		Posn getPosn();
+		Posn * getPosn();
 		
 	protected:
 		int m_height; //in pixels

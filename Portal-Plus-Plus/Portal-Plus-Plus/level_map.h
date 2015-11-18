@@ -17,6 +17,17 @@ public:
 	int getWidth();
 	int getHeight();
 
+	// return true if the given game object is touching the ceiling in
+	// this level on the top of the object
+	bool collisionTop(GameObject * object);
+
+	// return true if the given game object is touching the ground in
+	// this level on the top of the object
+	bool collisionBottom(GameObject * object);
+
+	// return true if the given game object is touching a wall on either side
+	bool collisionSide(GameObject * object);
+
 	// return the end target associated with this LevelMap
 	Posn getTarget();
 

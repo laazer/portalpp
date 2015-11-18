@@ -1,6 +1,7 @@
 #include "game_model.h"
 #include <stdlib.h>
 #include <iostream>
+#include <math.h>
 
 GameModel::GameModel(LevelMap & level, std::vector<GameObject> objects, Player & player) :
 	m_level(level), m_objects(objects), m_player(player) { }
@@ -25,8 +26,14 @@ GameModel * GameModel::movePlayer(bool moveRight) {
 }
 
 void GameModel::onTick() {
+	bool collision_top = m_level.collisionTop(&m_player);
+	bool collision_bottom = m_level.collisionBottom(&m_player);
+	if (collision_top || collision_bottom) {
+		m_player.updateVel(0, 0.0 - m_player.getVelocity().getY());
+	}
+	if (collision_bottom) {
+		m_player.setJumping(false);
+	}
 	m_player.applyGravity();
-	std::cout << m_player.getVelocity().getY() << std::endl;
-	m_player.updatePos();
-	std::cout << m_player.getPosn().getX() << " " << m_player.getPosn().getY() << std::endl;
+	m_player.updatePos(collision_bottom);
 }

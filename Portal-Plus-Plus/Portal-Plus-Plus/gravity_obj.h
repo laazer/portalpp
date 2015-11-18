@@ -12,8 +12,9 @@ public:
 	GravityObject() = default;
 	Velocity applyGravity();
 	Velocity getVelocity();
-	Posn updatePos();
+	Posn updatePos(bool onGround);
 	GravityObject * updateVel(double dx, double dy);
+
 
 protected:
 	GravityObject(int height, int width, Posn & p);

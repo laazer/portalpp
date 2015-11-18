@@ -19,12 +19,12 @@ const double Velocity::getY() {
 	return m_y_vel;
 }
 
-Velocity Velocity::setX(double d) {
+Velocity * Velocity::setX(double d) {
 	m_x_vel = d;
-	return (*this);
+	return this;
 }
 
-Velocity Velocity::setY(double d) {
+Velocity * Velocity::setY(double d) {
 	m_y_vel = d;
-	return (*this);
+	return this;
 }

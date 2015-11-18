@@ -2,7 +2,7 @@
 #define PLAYER_H
 #include "posn.h"
 #include "gravity_obj.h"
-#define PLAYER_HEIGHT 50
+#define PLAYER_HEIGHT 60
 #define PLAYER_WIDTH 30
 
 
@@ -12,8 +12,10 @@ public:
 	Player() = default;
 	Player(Posn & p);
 
+	bool isJumping();
+	void setJumping(bool jumping);
 private:
-
+	bool m_is_jumping;
 };
 
 #endif

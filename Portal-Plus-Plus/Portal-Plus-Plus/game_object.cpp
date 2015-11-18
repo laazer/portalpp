@@ -25,8 +25,8 @@ int GameObject::getHeight() {
 	return m_height;
 }
 
-Posn GameObject::getPosn() {
-	return m_pos;
+Posn * GameObject::getPosn() {
+	return &m_pos;
 }
 
 bool operator==(const GameObject & g1, const GameObject & g2) {
