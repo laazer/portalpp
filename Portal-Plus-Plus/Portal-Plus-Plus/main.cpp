@@ -20,6 +20,7 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(CANVAS_WIDTH, CANVAS_HEIGHT), "Portal++");
 	window.setMouseCursorVisible(false);
+	window.setFramerateLimit(60);
 
 	Posn p1 = Posn(0, 560);
 	WallBlock bottom(800, 40, p1);
@@ -30,8 +31,8 @@ int main()
 	Posn p4 = Posn(0, 0);
 	WallBlock top(800, 40, p4);
 
-	Posn p5 = Posn(0, 260);
-	WallBlock b1(240, 340, p5);
+	Posn p5 = Posn(0, 500);
+	WallBlock b1(480, 340, p5);
 	Posn p6 = Posn(540, 0);
 	WallBlock b2(50, 425, p6);
 	std::vector<WallBlock> walls = std::vector<WallBlock>();

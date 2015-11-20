@@ -3,7 +3,7 @@
 #include "velocity.h"
 #include "posn.h"
 #include "game_object.h"
-#define GRAV_ACCEL 0.0006
+#define GRAV_ACCEL 0.3
 // acceleration due to gravity is in pixels per game tick
 
 
