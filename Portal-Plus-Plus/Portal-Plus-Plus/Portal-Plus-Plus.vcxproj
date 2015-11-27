@@ -154,32 +154,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="gravity_obj.cpp" />
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="game_model.cpp" />
     <ClCompile Include="key_handler.cpp" />
     <ClCompile Include="level_view.cpp" />
-    <ClCompile Include="level_map.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="game_model.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="posn.cpp" />
     <ClCompile Include="game_object.cpp" />
     <ClCompile Include="velocity.cpp" />
-    <ClCompile Include="wall_block.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_object.h" />
-    <ClInclude Include="gravity_obj.h" />
+    <ClInclude Include="enemy.h" />
     <ClInclude Include="key_handler.h" />
     <ClInclude Include="level_view.h" />
-    <ClInclude Include="level_map.h" />
     <ClInclude Include="game_model.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="posn.h" />
     <ClInclude Include="velocity.h" />
-    <ClInclude Include="wall_block.h" />
+    <ClInclude Include="world.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\test\portalpp\assets\crosshair.png" />
+    <Image Include="..\..\..\test\portalpp\assets\player.png" />
+    <Image Include="..\..\..\test\portalpp\assets\SpriteSheet1.png" />
     <Image Include="target_image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\test\portalpp\assets\Jump.ogg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

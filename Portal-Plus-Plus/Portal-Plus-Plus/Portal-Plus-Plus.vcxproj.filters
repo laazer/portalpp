@@ -45,16 +45,7 @@
     <ClCompile Include="velocity.cpp">
       <Filter>model\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gravity_obj.cpp">
-      <Filter>model\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="game_object.cpp">
-      <Filter>model\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="wall_block.cpp">
-      <Filter>model\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="level_map.cpp">
       <Filter>model\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="level_view.cpp">
@@ -62,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="key_handler.cpp">
       <Filter>controller</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>model\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="game_model.cpp">
       <Filter>model\Source Files</Filter>
@@ -77,16 +71,7 @@
     <ClInclude Include="velocity.h">
       <Filter>model\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gravity_obj.h">
-      <Filter>model\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game_object.h">
-      <Filter>model\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="level_map.h">
-      <Filter>model\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wall_block.h">
       <Filter>model\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="level_view.h">
@@ -98,10 +83,30 @@
     <ClInclude Include="game_model.h">
       <Filter>model\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="world.h">
+      <Filter>model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>model\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="target_image.png">
       <Filter>assets</Filter>
     </Image>
+    <Image Include="..\..\..\test\portalpp\assets\player.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="..\..\..\test\portalpp\assets\SpriteSheet1.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="..\..\..\test\portalpp\assets\crosshair.png">
+      <Filter>assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\test\portalpp\assets\Jump.ogg">
+      <Filter>assets</Filter>
+    </None>
   </ItemGroup>
 </Project>

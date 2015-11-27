@@ -4,8 +4,6 @@
 
 LevelView::LevelView(GameModel * model) {
 	this->m_model = model;
-	this->m_level = model->getLevel();
-	this->m_player = model->getPlayer();
 	this->m_mouse = Posn(-100, -100); // start the mouse off the screen
 	this->m_target_image = new sf::Texture();
 	m_target_image->loadFromFile(ASSETS_DIR TARGET_IMAGE, sf::IntRect());
@@ -29,6 +27,7 @@ void LevelView::updateMouse(Posn & p) {
 }
 
 void LevelView::render(sf::RenderWindow & canvas) {
+	/*
 	// first render the background onto the canvas
 	sf::RectangleShape bg(sf::Vector2f(m_level->getWidth(), m_level->getHeight()));
 	bg.setFillColor(LEVEL_COLOR);
@@ -66,5 +65,5 @@ void LevelView::render(sf::RenderWindow & canvas) {
 	crosshair.setPosition(m_mouse.getX() - (size.x / 2),
 		m_mouse.getY() - (size.y / 2));
 	canvas.draw(crosshair);
-
+	*/
 }

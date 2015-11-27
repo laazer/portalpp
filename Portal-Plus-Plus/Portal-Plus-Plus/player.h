@@ -1,21 +1,21 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "posn.h"
-#include "gravity_obj.h"
-#define PLAYER_HEIGHT 60
-#define PLAYER_WIDTH 30
 
+#include "game_object.h"
 
-class Player : public GravityObject {
+#define SPEED_X 0.05
+
+class Player : public IGameObject {
+
 public:
-	// constructors
-	Player() = default;
-	Player(Posn & p);
 
-	bool isJumping();
-	void setJumping(bool jumping);
-private:
-	bool m_is_jumping;
+	bool onGround;
+	Player(Texture &image);
+	void update(float time);
+	void Collision(int num);
+	void moveLeft();
+	void moveRight();
 };
 
-#endif
+
+#endif // PLAYER_H

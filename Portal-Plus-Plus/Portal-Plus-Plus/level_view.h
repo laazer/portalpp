@@ -1,7 +1,6 @@
 #ifndef LEVEL_VIEW_H
 #define LEVEL_VIEW_H
 #include "game_model.h"
-#include "level_map.h"
 #include "posn.h"
 #include <SFML/Graphics.hpp>
 #define LEVEL_COLOR sf::Color(0, 0, 0)
@@ -21,7 +20,6 @@ public:
 	void updateMouse(Posn & p);
 private:
 	GameModel * m_model;
-	LevelMap * m_level;
 	Player * m_player;
 	sf::Texture * m_target_image;
 	Posn m_mouse;
