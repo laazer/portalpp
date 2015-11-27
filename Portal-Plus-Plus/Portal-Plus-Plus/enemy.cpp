@@ -35,7 +35,7 @@ void Enemy::Collision()
 
 	for (int i = rect.top / UNIT; i < (rect.top + rect.height) / UNIT; i++) {
 		for (int j = rect.left / UNIT; j < (rect.left + rect.width) / UNIT; j++) {
-			if ((TileMap[i][j] == 'P') || (TileMap[i][j] == '0')) {
+			if (TileMap[i][j] == 'W') {
 				if (dx > 0) {
 					rect.left = (j * UNIT) - rect.width;
 					dx *= -1;

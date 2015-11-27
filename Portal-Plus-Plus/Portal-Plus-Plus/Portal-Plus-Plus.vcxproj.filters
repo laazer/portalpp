@@ -60,6 +60,9 @@
     <ClCompile Include="game_model.cpp">
       <Filter>model\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="portal.cpp">
+      <Filter>model\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -87,6 +90,9 @@
       <Filter>model\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="enemy.h">
+      <Filter>model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="portal.h">
       <Filter>model\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

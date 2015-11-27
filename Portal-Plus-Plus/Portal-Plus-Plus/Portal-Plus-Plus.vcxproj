@@ -160,6 +160,7 @@
     <ClCompile Include="level_view.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="portal.cpp" />
     <ClCompile Include="posn.cpp" />
     <ClCompile Include="game_object.cpp" />
     <ClCompile Include="velocity.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="level_view.h" />
     <ClInclude Include="game_model.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="portal.h" />
     <ClInclude Include="posn.h" />
     <ClInclude Include="velocity.h" />
     <ClInclude Include="world.h" />

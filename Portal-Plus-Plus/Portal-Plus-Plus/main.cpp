@@ -2,6 +2,7 @@
 #include "world.h"
 #include "enemy.h"
 #include "key_handler.h"
+#include "level_view.h"
 
 int main()
 {
@@ -17,6 +18,7 @@ int main()
 
 	Texture * tileSet = new Texture();
 	tileSet->loadFromFile(ASSET_DIR + "/SpriteSheet1.png");
+	
 
 	Player player(*tileSet);
 	Enemy enemy;
@@ -36,8 +38,9 @@ int main()
 	sf::Sprite crosshair(*tileSet);
 	crosshair.setTextureRect(IntRect(2 * UNIT, 2 * UNIT, UNIT, UNIT));
 	
-	GameModel model = GameModel(&player, enemies);
+	GameModel model = GameModel(tileSet, &player, enemies);
 	KeyHandler key_handler = KeyHandler();
+	LevelView view = LevelView(&model);
 
 	while (window.isOpen())
 	{
@@ -57,50 +60,65 @@ int main()
 		Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == Event::Closed)
+			if (event.type == Event::Closed) {
 				window.close();
+			}
+			if (event.type == sf::Event::MouseButtonPressed)
+			{
+				if (event.mouseButton.button == sf::Mouse::Left)
+				{
+					model.launchPortal(event.mouseButton.x, event.mouseButton.y, true);
+				}
+				else if (event.mouseButton.button == sf::Mouse::Right)
+				{
+					model.launchPortal(event.mouseButton.x, event.mouseButton.y, false);
+				}
+			}
 		}
 
-		if (Keyboard::isKeyPressed(Keyboard::Left)) {
+		if (Keyboard::isKeyPressed(Keyboard::A)) {
 			player.dx = -0.05;
 		}
 
-		if (Keyboard::isKeyPressed(Keyboard::Right)) {
+		if (Keyboard::isKeyPressed(Keyboard::D)) {
 			player.dx = 0.05;
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Up)) {
+		if (Keyboard::isKeyPressed(Keyboard::W)) {
 			if (player.onGround) {
 				player.dy = -0.27;
 				player.onGround = false;
 				//sound.play();
 			}
 		}
-		if (event.type == sf::Event::MouseButtonPressed) {
-			//event on mouse click
-		}
 
+		// updates all gam objects in the model
 		model.update(time);
 
+		// clear the window to a black background
+		window.clear(Color(0, 0, 0));
 
-		window.clear(Color(107, 140, 255));
-
+		// draw the level
 		for (int i = 0; i < H; i++) {
 			for (int j = 0; j < W; j++)
 			{
-				if (TileMap[i][j] == 'F')  tile.setTextureRect(IntRect(2 * UNIT, 3 * UNIT, UNIT, UNIT));
-				if (TileMap[i][j] == 'W')  tile.setTextureRect(IntRect(3 * UNIT, 0, UNIT, UNIT));
+				if (TileMap[i][j] == 'F')  tile.setTextureRect(IntRect(2 * UNIT + 3, 3 * UNIT, UNIT, UNIT));
+				if (TileMap[i][j] == 'W')  tile.setTextureRect(IntRect(3 * UNIT + 3, 0, UNIT, UNIT));
 				if ((TileMap[i][j] == ' ') || (TileMap[i][j] == '0')) continue;
 				tile.setPosition(j*UNIT - offsetX, i*UNIT - offsetY);
 				window.draw(tile);
 			}
 		}
 
-		window.draw(player.sprite);
-		window.draw(enemy.sprite);
+		// render the game objects on top of the level
+		view.render(&window);
+		// draw the crosshair at the current mouse location
 		window.draw(crosshair);
+		// display the window
 		window.display();
+		
 	}
 
+	delete tileSet;
 	return 0;
 }
 

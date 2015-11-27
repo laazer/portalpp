@@ -3,7 +3,7 @@
 Player::Player(Texture &image)
 {
 	sprite.setTexture(image);
-	rect = FloatRect(100, 180, UNIT, UNIT);
+	rect = FloatRect(100, 180, 20, UNIT);
 	dx = dy = 0.1;
 	currentFrame = 0;
 }

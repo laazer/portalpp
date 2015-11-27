@@ -31,12 +31,12 @@ String static TileMap[H] = {
 	"W                                      W",
 	"W                                      W",
 	"W                                      W",
-	"W                                      W",
-	"W                                      W",
-	"W                                      W",
-	"W       FFF                            W",
-	"W      F                               W",
-	"W     F                                W",
+	"W                         WWW          W",
+	"W                         WWW          W",
+	"W         FFFFFFFFF       WWW          W",
+	"W       FFFFFFFFFFFF      WWW          W",
+	"W      FFFFFFFFFFFFFF     WWW          W",
+	"W     FFFFFFFFFFFFFFFF    WWW          W",
 	"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 };
 #endif // WORLD
