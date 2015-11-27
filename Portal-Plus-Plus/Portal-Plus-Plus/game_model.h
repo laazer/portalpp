@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAME_MODEL_H
+#define GAME_MODEL_H
 #include <vector>
 #include "level_map.h"
 #include "game_object.h"
@@ -31,3 +32,5 @@ private:
 	std::vector<GameObject> m_objects;
 	Player m_player;
 };
+
+#endif

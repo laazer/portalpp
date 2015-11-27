@@ -22,19 +22,19 @@ int main()
 	window.setMouseCursorVisible(false);
 	window.setFramerateLimit(60);
 
-	Posn p1 = Posn(0, 560);
-	WallBlock bottom(800, 40, p1);
-	Posn p2 = Posn(0, 0);
-	WallBlock left(40, 600, p2);
-	Posn p3 = Posn(760, 0);
-	WallBlock right(40, 600, p3);
-	Posn p4 = Posn(0, 0);
-	WallBlock top(800, 40, p4);
+	Posn bottom_block_posn = Posn(0, 560);
+	WallBlock bottom(800, 40, bottom_block_posn);
+	Posn left_block_posn = Posn(0, 0);
+	WallBlock left(40, 600, left_block_posn);
+	Posn right_block_posn = Posn(760, 0);
+	WallBlock right(40, 600, right_block_posn);
+	Posn top_block_posn = Posn(0, 0);
+	WallBlock top(800, 40, top_block_posn);
 
-	Posn p5 = Posn(0, 500);
-	WallBlock b1(480, 340, p5);
-	Posn p6 = Posn(540, 0);
-	WallBlock b2(50, 425, p6);
+	Posn b1_block_posn = Posn(0, 500);
+	WallBlock b1(480, 340, b1_block_posn);
+	Posn b2_block_posn = Posn(540, 0);
+	WallBlock b2(50, 425, b2_block_posn);
 	std::vector<WallBlock> walls = std::vector<WallBlock>();
 	walls.push_back(bottom);
 	walls.push_back(left);
@@ -42,11 +42,12 @@ int main()
 	walls.push_back(top);
 	walls.push_back(b1);
 	walls.push_back(b2);
-	Posn p7 = Posn(60, 160);
-	std::cout << p7.getX() << " " << p7.getY() << std::endl;
-	LevelMap level_map = LevelMap(walls, CANVAS_WIDTH, CANVAS_HEIGHT, p7);
+	Posn target_posn = Posn(60, 160);
+	std::cout << target_posn.getX() << " " << target_posn.getY() << std::endl;
+	LevelMap level_map = LevelMap(walls, CANVAS_WIDTH, CANVAS_HEIGHT, target_posn);
 	std::vector<GameObject> objects = std::vector<GameObject>();
-	Player player = Player(Posn(100.0, 160.0));
+	Posn player_posn = Posn(100.0, 160.0);
+	Player player = Player(player_posn);
 	player.updateVel(0.15, -0.45);
 	std::cout << player.getPosn()->getX() << " " << player.getPosn()->getY() << std::endl;
 	GameModel model = GameModel(level_map, objects, player);

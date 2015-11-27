@@ -1,4 +1,5 @@
-#pragma once
+#ifndef KEY_HANDLER_H
+#define KEY_HANDLER_H
 #include "game_model.h"
 
 
@@ -16,3 +17,5 @@ public:
 private:
 	GameModel * m_model;
 };
+
+#endif
