@@ -3,6 +3,7 @@
 #include "velocity.h"
 #include "game_object.h"
 #include "posn.h"
+#include "player.h"
 
 #define PORTAL_SPEED 11.0
 
@@ -23,6 +24,9 @@ public:
 	
 	void update(float time);
 	void Collision();
+
+	// teleport the given player through this portal and to the given portal
+	void teleport(Player * player, Portal * to_portal);
 
 private:
 	bool m_is_blue;

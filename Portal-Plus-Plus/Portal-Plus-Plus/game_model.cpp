@@ -14,6 +14,7 @@ GameModel::~GameModel() {
 
 void GameModel::update(float time) {
 	m_player->update(time);
+	checkPortals();
 	for (int i = 0; i < m_enemies.size(); ++i) {
 		Enemy * enemy = m_enemies.at(i);
 		enemy->update(time);
@@ -39,9 +40,14 @@ void GameModel::update(float time) {
 }
 
 void GameModel::checkPortals() {
-	/*if (m_portal_1->rect.intersects(m_player->rect)) {
-
-	}*/
+	if (m_portal_1 && m_portal_2) {
+		if (m_portal_1->rect.intersects(m_player->rect)) {
+			m_portal_1->teleport(m_player, m_portal_2);
+		}
+		else if (m_portal_2->rect.intersects(m_player->rect)) {
+			m_portal_2->teleport(m_player, m_portal_1);
+		}
+	}
 }
 
 void GameModel::launchPortal(float target_x, float target_y, bool portal_1) {

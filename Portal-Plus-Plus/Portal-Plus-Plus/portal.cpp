@@ -19,7 +19,7 @@ Portal::Portal(Texture &image, float x, float y, float target_x, float target_y,
 	dx = x_component * PORTAL_SPEED;
 	dy = y_component * PORTAL_SPEED;
 	is_projectile = true;
-	rect = FloatRect(x, y, 16, 64);
+	rect = FloatRect(x - 2, y - 2, 14, 14);
 	sprite.setOrigin(sprite.getOrigin().x + rect.width / 2,
 		sprite.getOrigin().y + rect.height / 2);
 }
@@ -31,6 +31,72 @@ void Portal::update(float time) {
 		rect.left = rect.left + dx;
 		Collision();
 	}
+}
+
+void Portal::teleport(Player * player, Portal * to_portal) {	
+	float orig_x_vel = player->dx;
+	float orig_y_vel = player->dy;
+	float new_x_vel;
+	float new_y_vel;
+	
+	Wall to_portal_wall = to_portal->wall;
+	// don't do anything if both portals aren't on a wall yet
+	if (to_portal_wall == NONE || wall == NONE) {
+		return;
+	}
+	
+	// switch the velocity magnitudes if necessary without setting their signs yet
+	if (wall == TOP || wall == BOTTOM) {
+		if (to_portal_wall == TOP || to_portal_wall == BOTTOM) {
+			new_x_vel = orig_x_vel;
+			new_y_vel = orig_y_vel;
+		}
+		else {
+			new_x_vel = orig_y_vel;
+			new_y_vel = orig_x_vel;
+		}
+	}
+	else if (wall == LEFT || wall == RIGHT) {
+		if (to_portal_wall == TOP || to_portal_wall == BOTTOM) {
+			new_x_vel = orig_x_vel;
+			new_y_vel = orig_y_vel;
+		}
+		else {
+			new_x_vel = orig_y_vel;
+			new_y_vel = orig_x_vel;
+		}
+	}
+	int new_top;
+	int new_left;
+
+	// fix the signs of the new velocities
+	if (to_portal_wall == TOP) {
+		new_y_vel = new_y_vel > 0 ? new_y_vel : -new_y_vel;
+		new_top = to_portal->rect.top + 10;
+		new_left = to_portal->rect.left;
+	}
+	else if (to_portal_wall == BOTTOM) {
+		new_y_vel = new_y_vel < 0 ? new_y_vel : -new_y_vel;
+		new_top = to_portal->rect.top - 10;
+		new_left = to_portal->rect.left;
+	}
+	else if (to_portal_wall == LEFT) {
+		new_x_vel = new_x_vel > 0 ? new_x_vel : -new_x_vel;
+		new_top = to_portal->rect.top;
+		new_left = to_portal->rect.left + 10;
+	}
+	else if (to_portal_wall == RIGHT) {
+		new_x_vel = new_x_vel < 0 ? new_x_vel : -new_x_vel;
+		new_top = to_portal->rect.top;
+		new_left = to_portal->rect.left - 10;
+	}
+
+	// change the location of the given player
+	player->rect.top = new_top;// to_portal->rect.top + new_y_vel;
+	player->rect.left = new_left;// to_portal->rect.left + new_x_vel;
+	player->sprite.setPosition(new_left, new_top);
+	player->dx = new_x_vel;
+	player->dy = new_y_vel;
 }
 
 
