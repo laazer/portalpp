@@ -38,6 +38,12 @@ void GameModel::update(float time) {
 	}
 }
 
+void GameModel::checkPortals() {
+	/*if (m_portal_1->rect.intersects(m_player->rect)) {
+
+	}*/
+}
+
 void GameModel::launchPortal(float target_x, float target_y, bool portal_1) {
 	if (m_portal_1 && portal_1) {
 		delete m_portal_1;

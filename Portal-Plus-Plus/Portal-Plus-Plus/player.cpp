@@ -14,7 +14,7 @@ void Player::update(float time)
 	Collision(0);
 
 	if (!onGround) {
-		dy = dy + 0.0005 * time; //gravity
+		dy = dy + GRAVITY * time;
 	}
 
 	rect.top += dy * time;
@@ -29,12 +29,34 @@ void Player::update(float time)
 
 	if (dx > 0) {
 		sprite.setTextureRect(IntRect(5 * UNIT + 10, 0, UNIT, UNIT));
+		dx -= DRAG;
+		dx = dx < 0 ? 0 : dx;
 	}
 	if (dx < 0) {
 		sprite.setTextureRect(IntRect(5 * UNIT + 10, 0, UNIT, UNIT));
+		dx += DRAG;
+		dx = dx > 0 ? 0 : dx;
 	}
 	sprite.setPosition(rect.left - offsetX, rect.top - offsetY);
-	dx = 0;
+	
+	if (onGround) {
+		dx = 0;
+	}
+}
+
+void Player::moveLeft() {
+	dx -= SPEED_X;
+}
+
+void Player::moveRight() {
+	dx += SPEED_X;
+}
+
+void Player::jump() {
+	if (onGround) {
+		dy = -JUMP_SIZE;
+		onGround = false;
+	}
 }
 
 void Player::Collision(int num)

@@ -42,6 +42,7 @@ int main()
 	KeyHandler key_handler = KeyHandler();
 	LevelView view = LevelView(&model);
 
+	window.setFramerateLimit(60);
 	while (window.isOpen())
 	{
 		sf::Vector2i mouse_coords = sf::Mouse::getPosition(window);
@@ -77,18 +78,14 @@ int main()
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::A)) {
-			player.dx = -0.05;
+			player.moveLeft();
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::D)) {
-			player.dx = 0.05;
+			player.moveRight();
 		}
 		if (Keyboard::isKeyPressed(Keyboard::W)) {
-			if (player.onGround) {
-				player.dy = -0.27;
-				player.onGround = false;
-				//sound.play();
-			}
+			player.jump();
 		}
 
 		// updates all gam objects in the model

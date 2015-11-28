@@ -22,6 +22,9 @@ public:
 	// launch a new portal towards the given x and y coordinates
 	void launchPortal(float target_x, float target_y, bool portal_1);
 
+	// if the player has entered a portal, move them accordingly
+	void checkPortals();
+
 	// get const pointers to all of the objects in this model ot render
 	const std::vector<IGameObject*> getRenderObjects();
 

@@ -4,7 +4,12 @@
 #include "game_object.h"
 #include "posn.h"
 
-#define PORTAL_SPEED 0.5
+#define PORTAL_SPEED 11.0
+
+enum Wall
+{
+	TOP, LEFT, BOTTOM, RIGHT, NONE
+};
 
 class Portal : public IGameObject {
 
@@ -13,8 +18,8 @@ public:
 
 	// represents whether or not this portal is currently traveling
 	bool is_projectile;
-	// represents whether this portal is displayed vertically or horizontally
-	bool is_vertical;
+	// represents which wall the portal is sitting on
+	Wall wall;
 	
 	void update(float time);
 	void Collision();
@@ -22,7 +27,6 @@ public:
 private:
 	bool m_is_blue;
 };
-
 
 
 

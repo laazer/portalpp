@@ -8,7 +8,7 @@ Portal::Portal(Texture &image, float x, float y, float target_x, float target_y,
 		is_blue ?
 		IntRect(0, 3 * UNIT + 5, UNIT, 10) :
 		IntRect(0, 5 * UNIT + 7, UNIT, 10));
-	is_vertical = true;
+	wall = NONE;
 	this->sprite.setPosition(x, y);
 	// calculate the unit vector in the correct direction to the target
 	float x_component = target_x - x;
@@ -53,18 +53,35 @@ void Portal::Collision() {
 	bool bottom_left = TileMap[bottom][left] == 'W';
 	bool bottom_right = TileMap[bottom][right] == 'W';
 
-	if ((top_left && top_right) || (bottom_left && bottom_right)) {
+	if (top_left && top_right) {
 		is_projectile = false;
-		is_vertical = false;
+		wall = TOP;
 		sprite.setTextureRect(
 			m_is_blue ?
 			IntRect(0, 3 * UNIT + 5, UNIT, UNIT * 2) :
 			IntRect(0, 5 * UNIT + 7, UNIT, UNIT * 2));
 		sprite.setRotation(90);
 	}
-	else if ((top_left && bottom_left) || (top_right && bottom_right)) {
+	else if (bottom_left && bottom_right) {
 		is_projectile = false;
-		is_vertical = true;
+		wall = BOTTOM;
+		sprite.setTextureRect(
+			m_is_blue ?
+			IntRect(0, 3 * UNIT + 5, UNIT, UNIT * 2) :
+			IntRect(0, 5 * UNIT + 7, UNIT, UNIT * 2));
+		sprite.setRotation(90);
+	}
+	else if (top_left && bottom_left) {
+		is_projectile = false;
+		wall = LEFT;
+		sprite.setTextureRect(
+			m_is_blue ?
+			IntRect(0, 3 * UNIT + 5, UNIT, UNIT * 2) :
+			IntRect(0, 5 * UNIT + 7, UNIT, UNIT * 2));
+	}
+	else if (top_right && bottom_right) {
+		is_projectile = false;
+		wall = RIGHT;
 		sprite.setTextureRect(
 			m_is_blue ?
 			IntRect(0, 3 * UNIT + 5, UNIT, UNIT * 2) :

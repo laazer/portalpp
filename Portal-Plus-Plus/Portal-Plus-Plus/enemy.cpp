@@ -5,7 +5,7 @@ void Enemy::set(Texture &image, int x, int y)
 	sprite.setTexture(image);
 	rect = FloatRect(x, y, UNIT, UNIT);
 
-	dx = 0.05;
+	dx = ENEMY_SPEED;
 	currentFrame = 0;
 	life = true;
 }
