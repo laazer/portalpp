@@ -18,6 +18,9 @@ public:
 	
 	void update(float time);
 	void Collision();
+
+private:
+	bool m_is_blue;
 };
 
 
