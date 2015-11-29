@@ -1,10 +1,15 @@
 #include "player.h"
 
+#define RIGHT_SPRITE IntRect(5 * UNIT + 10, 0, UNIT, UNIT)
+#define LEFT_SPRITE IntRect(5 * UNIT + 10, UNIT, UNIT, UNIT)
+
 Player::Player(Texture &image)
 {
 	sprite.setTexture(image);
-	rect = FloatRect(100, 180, 20, UNIT);
-	dx = dy = 0.1;
+	rect = FloatRect(100, 180, 20, 22);
+	sprite.setOrigin(rect.width / 2, rect.height / 2);
+	sprite.setTextureRect(IntRect(5 * UNIT + 10, 0, UNIT, UNIT));
+	dx = dy = 0;
 	currentFrame = 0;
 }
 
@@ -15,6 +20,9 @@ void Player::update(float time)
 
 	if (!onGround) {
 		dy = dy + GRAVITY * time;
+		if (dy > MAX_SPEED) {
+			dy = MAX_SPEED;
+		}
 	}
 
 	rect.top += dy * time;
@@ -27,16 +35,6 @@ void Player::update(float time)
 		currentFrame -= 3;
 	}
 
-	if (dx > 0) {
-		sprite.setTextureRect(IntRect(5 * UNIT + 10, 0, UNIT, UNIT));
-		dx -= DRAG;
-		dx = dx < 0 ? 0 : dx;
-	}
-	if (dx < 0) {
-		sprite.setTextureRect(IntRect(5 * UNIT + 10, 0, UNIT, UNIT));
-		dx += DRAG;
-		dx = dx > 0 ? 0 : dx;
-	}
 	sprite.setPosition(rect.left - offsetX, rect.top - offsetY);
 	
 	if (onGround) {
@@ -45,11 +43,31 @@ void Player::update(float time)
 }
 
 void Player::moveLeft() {
-	dx -= SPEED_X;
+	if (onGround) {
+		dx -= SPEED_X;
+		
+	}
+	else {
+		dx -= AIR_ACCELERATION;
+		if (dx <= -SPEED_X) {
+			dx = -SPEED_X;
+		}
+	}
+	sprite.setTextureRect(LEFT_SPRITE);
 }
 
 void Player::moveRight() {
-	dx += SPEED_X;
+	if (onGround) {
+		dx += SPEED_X;
+
+	}
+	else {
+		dx += AIR_ACCELERATION;
+		if (dx >= SPEED_X) {
+			dx = SPEED_X;
+		}
+	}
+	sprite.setTextureRect(RIGHT_SPRITE);
 }
 
 void Player::jump() {

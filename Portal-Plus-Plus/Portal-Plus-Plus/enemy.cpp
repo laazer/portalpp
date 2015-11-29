@@ -1,8 +1,13 @@
 #include "enemy.h"
 
+#define RIGHT_ENEMY IntRect(0, 0, UNIT, UNIT)
+#define LEFT_ENEMY IntRect(UNIT, 0, UNIT, UNIT)
+#define DEAD_ENEMY IntRect(58, 0, UNIT, UNIT)
+
 void Enemy::set(Texture &image, int x, int y)
 {
 	sprite.setTexture(image);
+	sprite.setTextureRect(RIGHT_ENEMY);
 	rect = FloatRect(x, y, UNIT, UNIT);
 
 	dx = ENEMY_SPEED;
@@ -16,16 +21,8 @@ void Enemy::update(float time)
 
 	Collision();
 
-	currentFrame += time * 0.005;
-
-	if (currentFrame > 2) {
-		currentFrame -= 2;
-	}
-
-	sprite.setTextureRect(IntRect(18 * int(currentFrame), 0, UNIT, UNIT));
-
 	if (!life) {
-		sprite.setTextureRect(IntRect(58, 0, UNIT, UNIT));
+		sprite.setScale(0, 0);
 	}
 	sprite.setPosition(rect.left - offsetX, rect.top - offsetY);
 }
@@ -36,13 +33,12 @@ void Enemy::Collision()
 	for (int i = rect.top / UNIT; i < (rect.top + rect.height) / UNIT; i++) {
 		for (int j = rect.left / UNIT; j < (rect.left + rect.width) / UNIT; j++) {
 			if (TileMap[i][j] == 'W') {
-				if (dx > 0) {
-					rect.left = (j * UNIT) - rect.width;
-					dx *= -1;
+				dx *= -1;
+				if (dx < 0) {
+					sprite.setTextureRect(LEFT_ENEMY);
 				}
-				else if (dx < 0) {
-					rect.left = (j * UNIT) + UNIT;
-					dx *= -1;
+				else {
+					sprite.setTextureRect(RIGHT_ENEMY);
 				}
 			}
 		}

@@ -5,7 +5,7 @@
 #include "posn.h"
 #include "player.h"
 
-#define PORTAL_SPEED 11.0
+#define PORTAL_SPEED 15.0
 
 enum Wall
 {

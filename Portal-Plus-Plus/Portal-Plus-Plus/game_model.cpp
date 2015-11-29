@@ -13,8 +13,8 @@ GameModel::~GameModel() {
 }
 
 void GameModel::update(float time) {
-	m_player->update(time);
 	checkPortals();
+	m_player->update(time);
 	for (int i = 0; i < m_enemies.size(); ++i) {
 		Enemy * enemy = m_enemies.at(i);
 		enemy->update(time);

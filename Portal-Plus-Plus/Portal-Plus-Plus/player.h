@@ -7,6 +7,8 @@
 #define GRAVITY 0.0009
 #define JUMP_SIZE 0.4
 #define DRAG 0.3
+#define AIR_ACCELERATION 0.07
+#define MAX_SPEED 0.7
 
 class Player : public IGameObject {
 
