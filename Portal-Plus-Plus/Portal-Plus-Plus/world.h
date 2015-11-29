@@ -21,6 +21,28 @@ const int W = 40;
 
 String static TileMap[H] = {
 	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+	"W                         FFF          W",
+	"W                         FFF          W",
+	"W                         FFF          W",
+	"W                         FFF          W",
+	"W                         FFF          W",
+	"W                         FFF          W",
+	"W                                      W",
+	"W                                      W",
+	"W                         FFF          W",
+	"W                         FFF          W",
+	"W                         WWW          W",
+	"W        0         0      WWW          W",
+	"W         FFFFFFFFF       WWW          W",
+	"W       FFFFFFFFFFFF      WWW     E    W",
+	"W      FFFFFFFFFFFFFF     WWW          W",
+	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+	
+};
+/*
+String static TileMap[H] = {
+	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
 	"W                                      W",
 	"W                                      W",
 	"W                                      W",
@@ -38,7 +60,7 @@ String static TileMap[H] = {
 	"W      FFFFFFFFFFFFFF     WWW          W",
 	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
 	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
-	
-};
+
+};*/
 #endif // WORLD
 

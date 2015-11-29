@@ -32,7 +32,7 @@ void Enemy::Collision()
 
 	for (int i = rect.top / UNIT; i < (rect.top + rect.height) / UNIT; i++) {
 		for (int j = rect.left / UNIT; j < (rect.left + rect.width) / UNIT; j++) {
-			if (TileMap[i][j] == 'W') {
+			if (TileMap[i][j] != ' ') {
 				dx *= -1;
 				if (dx < 0) {
 					sprite.setTextureRect(LEFT_ENEMY);

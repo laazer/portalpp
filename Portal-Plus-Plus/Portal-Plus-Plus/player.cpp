@@ -47,6 +47,9 @@ void Player::moveLeft() {
 		dx -= SPEED_X;
 		
 	}
+	else {
+		dx -= AIR_ACCELERATION;
+	}
 	sprite.setTextureRect(LEFT_SPRITE);
 }
 
@@ -54,6 +57,9 @@ void Player::moveRight() {
 	if (onGround) {
 		dx += SPEED_X;
 
+	}
+	else {
+		dx += AIR_ACCELERATION;
 	}
 	sprite.setTextureRect(RIGHT_SPRITE);
 }

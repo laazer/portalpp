@@ -10,7 +10,6 @@ public:
 	FloatRect rect;
 	Sprite sprite;
 	float currentFrame;
-	void update(float time);
 	void moveX(float x);
 	void moveY(float y);
 

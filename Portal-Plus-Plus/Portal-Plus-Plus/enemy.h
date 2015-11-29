@@ -3,7 +3,7 @@
 
 #include "game_object.h"
 
-#define ENEMY_SPEED 0.2
+#define ENEMY_SPEED 0.14
 
 class Enemy : public IGameObject
 {

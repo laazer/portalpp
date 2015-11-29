@@ -19,11 +19,15 @@ int main()
 
 	Texture * tileSet = new Texture();
 	tileSet->loadFromFile(ASSET_DIR + "/SpriteSheet1.png");
+
+	Texture * background_texture = new Texture();
+	background_texture->loadFromFile(ASSET_DIR + "/Background.png");
+	sf::Sprite background(*background_texture);
 	
 
 	Player player(*tileSet, 100, 440);
 	Enemy enemy;
-	enemy.set(*tileSet, 4 * UNIT, 3 * UNIT);
+	enemy.set(*tileSet, 10 * UNIT, 12 * UNIT);
 	std::vector<Enemy*> enemies;
 	enemies.push_back(&enemy);
 
@@ -51,7 +55,7 @@ int main()
 		sf::Vector2i mouse_coords = sf::Mouse::getPosition(window);
 		crosshair.setPosition(mouse_coords.x, mouse_coords.y);
 
-		// get the clocl time that has elapsed since the last clock tick to account for
+		// get the clock time that has elapsed since the last clock tick to account for
 		// any missed frames
 		float time = clock.getElapsedTime().asMicroseconds();
 		clock.restart();
@@ -83,6 +87,7 @@ int main()
 
 		// clear the window to a black background
 		window.clear(Color(0, 0, 0));
+		window.draw(background);
 
 		// draw the level
 		for (int i = 0; i < H; i++) {
