@@ -159,11 +159,13 @@
     <ClCompile Include="key_handler.cpp" />
     <ClCompile Include="level_view.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mouse_handler.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="portal.cpp" />
     <ClCompile Include="posn.cpp" />
     <ClCompile Include="game_object.cpp" />
     <ClCompile Include="velocity.cpp" />
+    <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_object.h" />
@@ -171,6 +173,7 @@
     <ClInclude Include="key_handler.h" />
     <ClInclude Include="level_view.h" />
     <ClInclude Include="game_model.h" />
+    <ClInclude Include="mouse_handler.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="portal.h" />
     <ClInclude Include="posn.h" />

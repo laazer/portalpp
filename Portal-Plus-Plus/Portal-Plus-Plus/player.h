@@ -15,7 +15,7 @@ class Player : public IGameObject {
 public:
 
 	bool onGround;
-	Player(Texture &image);
+	Player(Texture &image, int x, int y);
 	void update(float time);
 	void Collision(int num);
 	void moveLeft();

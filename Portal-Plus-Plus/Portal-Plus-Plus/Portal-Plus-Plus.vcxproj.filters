@@ -63,6 +63,12 @@
     <ClCompile Include="portal.cpp">
       <Filter>model\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="world.cpp">
+      <Filter>model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mouse_handler.cpp">
+      <Filter>controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -94,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="portal.h">
       <Filter>model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mouse_handler.h">
+      <Filter>controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

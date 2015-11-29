@@ -59,7 +59,7 @@ void Portal::teleport(Player * player, Portal * to_portal) {
 		}
 	}
 	else if (wall == LEFT || wall == RIGHT) {
-		if (to_portal_wall == TOP || to_portal_wall == BOTTOM) {
+		if (to_portal_wall == LEFT || to_portal_wall == RIGHT) {
 			new_x_vel = orig_x_vel;
 			new_y_vel = orig_y_vel;
 		}

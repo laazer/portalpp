@@ -28,6 +28,9 @@ public:
 	// get const pointers to all of the objects in this model ot render
 	const std::vector<IGameObject*> getRenderObjects();
 
+	// get the player object that is contained within this model
+	Player * getPlayer();
+
 private:
 	Player * m_player;
 	std::vector<Enemy*> m_enemies;

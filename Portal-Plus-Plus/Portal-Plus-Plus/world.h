@@ -34,7 +34,7 @@ String static TileMap[H] = {
 	"W                         WWW          W",
 	"W                         WWW          W",
 	"W         FFFFFFFFF       WWW          W",
-	"W       FFFFFFFFFFFF      WWW          W",
+	"W       FFFFFFFFFFFF      WWW     E    W",
 	"W      FFFFFFFFFFFFFF     WWW          W",
 	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
 	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"

@@ -6,25 +6,17 @@ KeyHandler::KeyHandler(GameModel * model) {
 }
 
 GameModel * KeyHandler::handleKey() {
-	// check if left arrow is currently pressed
+	// check if A is currently pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		//m_model->getPlayer()->getPosn()->move(-3, 0);
+		m_model->getPlayer()->moveLeft();
 	}
-	// check if right arrow is currently pressed
+	// check if D is currently pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		//m_model->getPlayer()->getPosn()->move(3, 0);
+		m_model->getPlayer()->moveRight();
 	}
-	return m_model;
-}
-
-GameModel * KeyHandler::handleEvent(sf::Event event) {
-	/*if (event.key.code == sf::Keyboard::W) {
-		if (!(m_model->getPlayer()->isJumping())) {
-			m_model->getPlayer()->setJumping(true);
-			m_model->getPlayer()->updateVel(0 - m_model->getPlayer()->getVelocity().getX(), -7);
-			m_model->getPlayer()->updatePos(false);
-		}
+	// check if W is currently pressed
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		m_model->getPlayer()->jump();
 	}
-	*/
 	return m_model;
 }

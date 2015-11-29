@@ -3,10 +3,10 @@
 #define RIGHT_SPRITE IntRect(5 * UNIT + 10, 0, UNIT, UNIT)
 #define LEFT_SPRITE IntRect(5 * UNIT + 10, UNIT, UNIT, UNIT)
 
-Player::Player(Texture &image)
+Player::Player(Texture &image, int x, int y)
 {
 	sprite.setTexture(image);
-	rect = FloatRect(100, 180, 20, 22);
+	rect = FloatRect(x, y, 20, 22);
 	sprite.setOrigin(rect.width / 2, rect.height / 2);
 	sprite.setTextureRect(IntRect(5 * UNIT + 10, 0, UNIT, UNIT));
 	dx = dy = 0;
@@ -47,12 +47,6 @@ void Player::moveLeft() {
 		dx -= SPEED_X;
 		
 	}
-	else {
-		dx -= AIR_ACCELERATION;
-		if (dx <= -SPEED_X) {
-			dx = -SPEED_X;
-		}
-	}
 	sprite.setTextureRect(LEFT_SPRITE);
 }
 
@@ -60,12 +54,6 @@ void Player::moveRight() {
 	if (onGround) {
 		dx += SPEED_X;
 
-	}
-	else {
-		dx += AIR_ACCELERATION;
-		if (dx >= SPEED_X) {
-			dx = SPEED_X;
-		}
 	}
 	sprite.setTextureRect(RIGHT_SPRITE);
 }

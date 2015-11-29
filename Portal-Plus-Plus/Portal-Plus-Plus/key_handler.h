@@ -11,9 +11,6 @@ public:
 	// handles the key input appropriately
 	GameModel * handleKey();
 
-	// handles keyboard event input
-	GameModel * handleEvent(sf::Event event);
-
 private:
 	GameModel * m_model;
 };

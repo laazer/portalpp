@@ -2,6 +2,7 @@
 #include "world.h"
 #include "enemy.h"
 #include "key_handler.h"
+#include "mouse_handler.h"
 #include "level_view.h"
 
 int main()
@@ -12,7 +13,7 @@ int main()
 	std::streambuf* sbuf = std::cout.rdbuf();
 	std::cout.rdbuf(file.rdbuf());
 
-	RenderWindow window(VideoMode(W * UNIT, H * UNIT), "Portal++!");
+	RenderWindow window(VideoMode(W * UNIT, H * UNIT), "Portal++");
 
 	window.setMouseCursorVisible(false);
 
@@ -20,7 +21,7 @@ int main()
 	tileSet->loadFromFile(ASSET_DIR + "/SpriteSheet1.png");
 	
 
-	Player player(*tileSet);
+	Player player(*tileSet, 100, 440);
 	Enemy enemy;
 	enemy.set(*tileSet, 4 * UNIT, 3 * UNIT);
 	std::vector<Enemy*> enemies;
@@ -39,16 +40,19 @@ int main()
 	crosshair.setTextureRect(IntRect(2 * UNIT, 2 * UNIT, UNIT, UNIT));
 	
 	GameModel model = GameModel(tileSet, &player, enemies);
-	KeyHandler key_handler = KeyHandler();
+	KeyHandler key_handler = KeyHandler(&model);
+	MouseHandler mouse_handler = MouseHandler(&model);
 	LevelView view = LevelView(&model);
 
 	window.setFramerateLimit(60);
 	while (window.isOpen())
 	{
+		// set the position of the crosshair based on the mosue position
 		sf::Vector2i mouse_coords = sf::Mouse::getPosition(window);
-
 		crosshair.setPosition(mouse_coords.x, mouse_coords.y);
 
+		// get the clocl time that has elapsed since the last clock tick to account for
+		// any missed frames
 		float time = clock.getElapsedTime().asMicroseconds();
 		clock.restart();
 
@@ -58,6 +62,7 @@ int main()
 			time = 20;
 		}
 
+		// poll events and delegate to the mouse handler if there was a click
 		Event event;
 		while (window.pollEvent(event))
 		{
@@ -66,29 +71,14 @@ int main()
 			}
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
-				if (event.mouseButton.button == sf::Mouse::Left)
-				{
-					model.launchPortal(event.mouseButton.x, event.mouseButton.y, true);
-				}
-				else if (event.mouseButton.button == sf::Mouse::Right)
-				{
-					model.launchPortal(event.mouseButton.x, event.mouseButton.y, false);
-				}
+				mouse_handler.handleMouse(event);
 			}
 		}
 
-		if (Keyboard::isKeyPressed(Keyboard::A)) {
-			player.moveLeft();
-		}
+		// handles any keys that are currently pressed down
+		key_handler.handleKey();
 
-		if (Keyboard::isKeyPressed(Keyboard::D)) {
-			player.moveRight();
-		}
-		if (Keyboard::isKeyPressed(Keyboard::W)) {
-			player.jump();
-		}
-
-		// updates all gam objects in the model
+		// updates all game objects in the model
 		model.update(time);
 
 		// clear the window to a black background
@@ -101,6 +91,7 @@ int main()
 				if (TileMap[i][j] == 'F')  tile.setTextureRect(IntRect(2 * UNIT + 3, 3 * UNIT, UNIT, UNIT));
 				if (TileMap[i][j] == 'W')  tile.setTextureRect(IntRect(3 * UNIT + 3, 0, UNIT, UNIT));
 				if ((TileMap[i][j] == ' ') || (TileMap[i][j] == '0')) continue;
+				if (TileMap[i][j] == 'E')  tile.setTextureRect(IntRect(2 * UNIT + 3, 5.25 * UNIT, UNIT, 2 * UNIT));
 				tile.setPosition(j*UNIT - offsetX, i*UNIT - offsetY);
 				window.draw(tile);
 			}
