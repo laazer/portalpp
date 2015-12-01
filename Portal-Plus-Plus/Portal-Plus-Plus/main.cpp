@@ -1,3 +1,5 @@
+#include <ctime>
+#include <cstdlib>
 #include "player.h"
 #include "world.h"
 #include "enemy.h"
@@ -24,12 +26,26 @@ int main()
 	background_texture->loadFromFile(ASSET_DIR + "/Background.png");
 	sf::Sprite background(*background_texture);
 	
+	srand(time(NULL));
 
-	Player player(*tileSet, 100, 440);
-	Enemy enemy;
-	enemy.set(*tileSet, 10 * UNIT, 12 * UNIT);
+	Player player(*tileSet, 100, 300);
 	std::vector<Enemy*> enemies;
-	enemies.push_back(&enemy);
+	for (int i = 0; i < H; i++) {
+		for (int j = 0; j < W; j++)
+		{
+			if (TileMap[i][j] == 'X') {
+				Enemy *enemy = new Enemy();
+				enemy->set(*tileSet, j * UNIT, i * UNIT);
+				enemies.push_back(enemy);
+				if (rand() % 2 == 0) {
+					enemy->dx *= -1;
+				}
+			}
+			else if (TileMap[i][j] == 'P') {
+				player.setPos(j, i);
+			}
+		}
+	}
 
 	Sprite tile(*tileSet);
 
@@ -95,7 +111,7 @@ int main()
 			{
 				if (TileMap[i][j] == 'F')  tile.setTextureRect(IntRect(2 * UNIT + 3, 3 * UNIT, UNIT, UNIT));
 				if (TileMap[i][j] == 'W')  tile.setTextureRect(IntRect(3 * UNIT + 3, 0, UNIT, UNIT));
-				if ((TileMap[i][j] == ' ') || (TileMap[i][j] == '0')) continue;
+				if (TileMap[i][j] == ' ' || TileMap[i][j] == '0' || TileMap[i][j] == 'X' || TileMap[i][j] == 'P') continue;
 				if (TileMap[i][j] == 'E')  tile.setTextureRect(IntRect(2 * UNIT + 3, 5.25 * UNIT, UNIT, 2 * UNIT));
 				tile.setPosition(j*UNIT - offsetX, i*UNIT - offsetY);
 				window.draw(tile);

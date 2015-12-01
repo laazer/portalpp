@@ -71,6 +71,11 @@ void Player::jump() {
 	}
 }
 
+void Player::setPos(float x, float y) {
+	rect.top = UNIT * y;
+	rect.left = UNIT * x;
+}
+
 void Player::Collision(int num)
 {
 	for (int i = rect.top / UNIT; i < (rect.top + rect.height) / UNIT; i++)
