@@ -9,12 +9,13 @@
 #define DRAG 0.3
 #define AIR_ACCELERATION 0.003
 #define MAX_SPEED 0.7
+#define STARTING_LIVES 3
 
 class Player : public IGameObject {
 
 public:
 
-	bool onGround;
+	Player() = default;
 	Player(Texture &image, int x, int y);
 	void update(float time);
 	void Collision(int num);
@@ -22,6 +23,13 @@ public:
 	void jump();
 	void moveRight();
 	void setPos(float x, float y);
+	void resetPos();
+
+	int lives_remaining;
+	bool onGround;
+
+private:
+	sf::Vector2i m_original_pos;
 };
 
 

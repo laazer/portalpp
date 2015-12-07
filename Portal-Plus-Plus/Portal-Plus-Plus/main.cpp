@@ -1,5 +1,6 @@
 #include <ctime>
 #include <cstdlib>
+#include <stdlib.h>
 #include "player.h"
 #include "world.h"
 #include "enemy.h"
@@ -28,8 +29,9 @@ int main()
 	
 	srand(time(NULL));
 
-	Player player(*tileSet, 100, 300);
+	Player player;
 	std::vector<Enemy*> enemies;
+	FloatRect door;
 	for (int i = 0; i < H; i++) {
 		for (int j = 0; j < W; j++)
 		{
@@ -42,12 +44,21 @@ int main()
 				}
 			}
 			else if (TileMap[i][j] == 'P') {
-				player.setPos(j, i);
+				player = Player(*tileSet, j * UNIT, i * UNIT);
+			}
+			else if (TileMap[i][j] == 'E') {
+				// set the rectangle of the door to a space just above the floor
+				// where the door contacts the ground
+				door = FloatRect((j + 0.45) * UNIT, (i + 2) * UNIT - 10,
+					UNIT / 10.0, UNIT);
 			}
 		}
 	}
 
 	Sprite tile(*tileSet);
+
+	Sprite * life = new Sprite(*tileSet);
+	life->setTextureRect(IntRect(3 + UNIT * 2, 13 + UNIT * 7, UNIT, UNIT));
 
 	/** For adding sound
 	SoundBuffer buffer;
@@ -59,12 +70,13 @@ int main()
 	sf::Sprite crosshair(*tileSet);
 	crosshair.setTextureRect(IntRect(2 * UNIT, 2 * UNIT, UNIT, UNIT));
 	
-	GameModel model = GameModel(tileSet, &player, enemies);
+	GameModel model = GameModel(tileSet, &player, enemies, door);
 	KeyHandler key_handler = KeyHandler(&model);
 	MouseHandler mouse_handler = MouseHandler(&model);
-	LevelView view = LevelView(&model);
+	LevelView view = LevelView(&model, life);
 
 	window.setFramerateLimit(60);
+	bool game_over = false;
 	while (window.isOpen())
 	{
 		// set the position of the crosshair based on the mosue position
@@ -118,16 +130,32 @@ int main()
 			}
 		}
 
+		if (model.reachedDoor()) {
+			window.close();
+		}
+
+		if (player.lives_remaining <= 0) {
+			game_over = true;
+			player.sprite.setColor(Color::Red);
+		}
+
+
 		// render the game objects on top of the level
 		view.render(&window);
 		// draw the crosshair at the current mouse location
 		window.draw(crosshair);
 		// display the window
 		window.display();
+
+		if (game_over) {
+			// do stuff here to show that the game is done
+			break;
+		}
 		
 	}
 
 	delete tileSet;
+	delete life;
 	return 0;
 }
 

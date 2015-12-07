@@ -11,6 +11,8 @@ Player::Player(Texture &image, int x, int y)
 	sprite.setTextureRect(IntRect(5 * UNIT + 10, 0, UNIT, UNIT));
 	dx = dy = 0;
 	currentFrame = 0;
+	lives_remaining = STARTING_LIVES;
+	m_original_pos = sf::Vector2i(x, y);
 }
 
 void Player::update(float time)
@@ -74,6 +76,11 @@ void Player::jump() {
 void Player::setPos(float x, float y) {
 	rect.top = UNIT * y;
 	rect.left = UNIT * x;
+}
+
+void Player::resetPos() {
+	rect = FloatRect(m_original_pos.x, m_original_pos.y, 20, 22);
+	dx = dy = 0;
 }
 
 void Player::Collision(int num)

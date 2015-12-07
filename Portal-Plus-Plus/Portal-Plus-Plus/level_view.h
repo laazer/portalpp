@@ -14,10 +14,12 @@
 class LevelView {
 public:
 	LevelView() = default;
-	LevelView(GameModel * model);
+	LevelView(GameModel * model, sf::Sprite * life_sprite);
 	void render(sf::RenderWindow * canvas);
+
 private:
 	GameModel * m_model;
+	sf::Sprite * m_life_sprite;
 };
 
 #endif

@@ -13,7 +13,7 @@
 class GameModel {
 public:
 	GameModel() = default;
-	GameModel(Texture * image, Player * player, std::vector<Enemy*> & enemies);
+	GameModel(Texture * image, Player * player, std::vector<Enemy*> & enemies, const sf::FloatRect door);
 	~GameModel();
 
 	// update the positions of all the contents of this level
@@ -31,12 +31,16 @@ public:
 	// get the player object that is contained within this model
 	Player * getPlayer();
 
+	// return true if the player has reached a door
+	bool reachedDoor();
+
 private:
 	Player * m_player;
 	std::vector<Enemy*> m_enemies;
 	Portal * m_portal_1;
 	Portal * m_portal_2;
 	Texture * m_image;
+	FloatRect m_door;
 };
 
 #endif

@@ -1,11 +1,13 @@
 #include "game_model.h"
 
-GameModel::GameModel(Texture * image, Player * player, std::vector<Enemy*> & enemies) {
+GameModel::GameModel(Texture * image, Player * player,
+	std::vector<Enemy*> & enemies, const sf::FloatRect door) {
 	m_player = player;
 	m_enemies = enemies;
 	m_image = image;
 	m_portal_1 = NULL;
 	m_portal_2 = NULL;
+	m_door = door;
 }
 
 GameModel::~GameModel() {
@@ -31,7 +33,8 @@ void GameModel::update(float time) {
 					enemy->life = false;
 				}
 				else {
-					m_player->sprite.setColor(Color::Red);
+					m_player->lives_remaining -= 1;
+					m_player->resetPos();
 				}
 			}
 		}
@@ -80,6 +83,10 @@ void GameModel::launchPortal(float target_x, float target_y, bool portal_1) {
 			target_y,
 			false);
 	}
+}
+
+bool GameModel::reachedDoor() {
+	return m_player->rect.intersects(m_door);
 }
 
 const std::vector<IGameObject*> GameModel::getRenderObjects() {
