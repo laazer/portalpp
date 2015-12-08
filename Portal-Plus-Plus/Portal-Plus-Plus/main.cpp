@@ -10,12 +10,14 @@
 
 int main()
 {
+	World::initLevels();
+	World::setLevel(0);
 	// redirect cout to point to cout.txt for debugging purposes
 	std::ofstream file;
 	file.open("cout.txt");
 	std::streambuf* sbuf = std::cout.rdbuf();
 	std::cout.rdbuf(file.rdbuf());
-
+	
 	RenderWindow window(VideoMode(W * UNIT, H * UNIT), "Portal++");
 
 	window.setMouseCursorVisible(false);
@@ -35,7 +37,7 @@ int main()
 	for (int i = 0; i < H; i++) {
 		for (int j = 0; j < W; j++)
 		{
-			if (TileMap[i][j] == 'X') {
+			if (World::TileMap[i][j] == 'X') {
 				Enemy *enemy = new Enemy();
 				enemy->set(*tileSet, j * UNIT, i * UNIT);
 				enemies.push_back(enemy);
@@ -43,10 +45,10 @@ int main()
 					enemy->dx *= -1;
 				}
 			}
-			else if (TileMap[i][j] == 'P') {
+			else if (World::TileMap[i][j] == 'P') {
 				player = Player(*tileSet, j * UNIT, i * UNIT);
 			}
-			else if (TileMap[i][j] == 'E') {
+			else if (World::TileMap[i][j] == 'E') {
 				// set the rectangle of the door to a space just above the floor
 				// where the door contacts the ground
 				door = FloatRect((j + 0.45) * UNIT, (i + 2) * UNIT - 10,
@@ -121,17 +123,17 @@ int main()
 		for (int i = 0; i < H; i++) {
 			for (int j = 0; j < W; j++)
 			{
-				if (TileMap[i][j] == 'F')  tile.setTextureRect(IntRect(2 * UNIT + 3, 3 * UNIT, UNIT, UNIT));
-				if (TileMap[i][j] == 'W')  tile.setTextureRect(IntRect(3 * UNIT + 3, 0, UNIT, UNIT));
-				if (TileMap[i][j] == ' ' || TileMap[i][j] == '0' || TileMap[i][j] == 'X' || TileMap[i][j] == 'P') continue;
-				if (TileMap[i][j] == 'E')  tile.setTextureRect(IntRect(2 * UNIT + 3, 5.25 * UNIT, UNIT, 2 * UNIT));
+				if (World::TileMap[i][j] == 'F')  tile.setTextureRect(IntRect(2 * UNIT + 3, 3 * UNIT, UNIT, UNIT));
+				if (World::TileMap[i][j] == 'W')  tile.setTextureRect(IntRect(3 * UNIT + 3, 0, UNIT, UNIT));
+				if (World::TileMap[i][j] == ' ' || World::TileMap[i][j] == '0' || World::TileMap[i][j] == 'X' || World::TileMap[i][j] == 'P') continue;
+				if (World::TileMap[i][j] == 'E')  tile.setTextureRect(IntRect(2 * UNIT + 3, 5.25 * UNIT, UNIT, 2 * UNIT));
 				tile.setPosition(j*UNIT - offsetX, i*UNIT - offsetY);
 				window.draw(tile);
 			}
 		}
 
 		if (model.reachedDoor()) {
-			window.close();
+			World::setLevel(World::current_level + 1);
 		}
 
 		if (player.lives_remaining <= 0) {

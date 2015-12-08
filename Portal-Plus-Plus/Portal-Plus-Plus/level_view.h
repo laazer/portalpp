@@ -1,7 +1,6 @@
 #ifndef LEVEL_VIEW_H
 #define LEVEL_VIEW_H
 #include "game_model.h"
-#include "posn.h"
 #include <SFML/Graphics.hpp>
 #define LEVEL_COLOR sf::Color(0, 0, 0)
 #define WALL_COLOR sf::Color(200, 200, 200)

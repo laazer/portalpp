@@ -7,3 +7,4 @@ void IGameObject::moveX(float x) {
 void IGameObject::moveY(float y) {
 	this->dy += y;
 }
+

@@ -116,13 +116,13 @@ void Portal::Collision() {
 	int right = (int)((rect.left + rect.width) / UNIT);
 	right = right < W ? right : W - 1;
 
-	bool top_left = TileMap[top][left] == 'W';
-	bool top_right = TileMap[top][right] == 'W';
-	bool bottom_left = TileMap[bottom][left] == 'W';
-	bool bottom_right = TileMap[bottom][right] == 'W';
+	bool top_left = World::TileMap[top][left] == 'W';
+	bool top_right = World::TileMap[top][right] == 'W';
+	bool bottom_left = World::TileMap[bottom][left] == 'W';
+	bool bottom_right = World::TileMap[bottom][right] == 'W';
 
-	if (TileMap[top][left] == 'F' || TileMap[top][right] == 'F' ||
-		TileMap[bottom][left] == 'F' || TileMap[bottom][right] == 'F') {
+	if (World::TileMap[top][left] == 'F' || World::TileMap[top][right] == 'F' ||
+		World::TileMap[bottom][left] == 'F' || World::TileMap[bottom][right] == 'F') {
 		is_projectile = false;
 		sprite.setScale(0, 0);
 		wall = NONE;

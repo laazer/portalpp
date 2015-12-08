@@ -39,12 +39,6 @@
     <ClCompile Include="player.cpp">
       <Filter>model\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="posn.cpp">
-      <Filter>model\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="velocity.cpp">
-      <Filter>model\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="game_object.cpp">
       <Filter>model\Source Files</Filter>
     </ClCompile>
@@ -72,12 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
-      <Filter>model\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="posn.h">
-      <Filter>model\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="velocity.h">
       <Filter>model\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game_object.h">

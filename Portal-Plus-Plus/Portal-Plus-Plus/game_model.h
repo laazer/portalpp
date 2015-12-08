@@ -34,12 +34,21 @@ public:
 	// return true if the player has reached a door
 	bool reachedDoor();
 
+	// configure this model using the given game objects
+	//void configure(float player_x, float player_y, std::vector<sf::Vector2f> enemy_pos, FloatRect door);
+
 private:
+	// pointer to the player in this level
 	Player * m_player;
+	// contains pointers to all enemies in this level
 	std::vector<Enemy*> m_enemies;
+	// pointer to the blue portal
 	Portal * m_portal_1;
+	// pointer to the red portal
 	Portal * m_portal_2;
+	// sprite sheet used to render game objects in this model
 	Texture * m_image;
+	// the rectangel corresponding to the door in this level
 	FloatRect m_door;
 };
 

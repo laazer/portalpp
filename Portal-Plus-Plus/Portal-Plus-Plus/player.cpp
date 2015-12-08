@@ -10,7 +10,6 @@ Player::Player(Texture &image, int x, int y)
 	sprite.setOrigin(rect.width / 2, rect.height / 2);
 	sprite.setTextureRect(IntRect(5 * UNIT + 10, 0, UNIT, UNIT));
 	dx = dy = 0;
-	currentFrame = 0;
 	lives_remaining = STARTING_LIVES;
 	m_original_pos = sf::Vector2i(x, y);
 }
@@ -30,12 +29,6 @@ void Player::update(float time)
 	rect.top += dy * time;
 	onGround = false;
 	Collision(1);
-
-	currentFrame += time * 0.005;
-
-	if (currentFrame > 3) {
-		currentFrame -= 3;
-	}
 
 	sprite.setPosition(rect.left - offsetX, rect.top - offsetY);
 	
@@ -88,7 +81,7 @@ void Player::Collision(int num)
 	for (int i = rect.top / UNIT; i < (rect.top + rect.height) / UNIT; i++)
 		for (int j = rect.left / UNIT; j < (rect.left + rect.width) / UNIT; j++)
 		{
-			if (TileMap[i][j] == 'W' || TileMap[i][j] == 'F')
+			if (World::TileMap[i][j] == 'W' || World::TileMap[i][j] == 'F')
 			{
 				if (dy > 0 && num == 1) { //bottom collision
 					rect.top = i*UNIT - rect.height;

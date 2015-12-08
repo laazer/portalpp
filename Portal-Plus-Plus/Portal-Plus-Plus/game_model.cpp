@@ -103,3 +103,20 @@ const std::vector<IGameObject*> GameModel::getRenderObjects() {
 	}
 	return objects;
 }
+/*
+void GameModel::configure(float player_x, float player_y, std::vector<sf::Vector2f> enemy_pos, FloatRect door) {
+	m_player->setPos(player_x, player_y);
+	for (int i = 0; i < m_enemies.size(); ++i) {
+		delete m_enemies.at(i);
+	}
+	for (int i = 0; i < enemy_pos.size(); ++i) {
+		Enemy *enemy = new Enemy();
+		enemy->set(*m_image, enemy_pos.at(i).x * UNIT, enemy_pos.at(i).y * UNIT);
+		m_enemies.push_back(enemy);
+		if (rand() % 2 == 0) {
+			enemy->dx *= -1;
+		}
+	}
+	m_door = door;
+}
+*/

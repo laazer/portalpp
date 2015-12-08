@@ -19,130 +19,28 @@ float static offsetY = 0;
 const int H = 18;
 const int W = 40;
 
-String static TileMap[H] = {
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                                      W",
-	"W                                      W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         WWW          W",
-	"W        0    X    0      WWW          W",
-	"W         FFFFFFFFF       WWW          W",
-	"W       FFFFFFFFFFFF      WWW     E    W",
-	"W P    FFFFFFFFFFFFFF     WWW          W",
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+
+// represents a world/level
+class World {
+public:
+	static String TileMap[H];
+	World() = default;
+	
+	// set the current level
+	static void setLevel(int level);
+
+	// represents the current level number
+	static int current_level;
+
+	// must be called on to create level array vector
+	static void initLevels();
+
+	// update the model based on the current level map
+	//static void updateModel(GameModel * model);
+
+private:
+	static std::vector<String*> m_levels;
 };
 
-String static Level1[H] = {
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-	"WFFFFFWWWWFFFFFFFFFFFFFFFFFFFFFFFFFFFFFW",
-	"WF                                     W",
-	"WW                                     W",
-	"WW                                     W",
-	"WW                                     W",
-	"WF                              E      W",
-	"WF                                     W",
-	"WF            FFFFFFFFWWWWWWWWWWWWWWWWWW",
-	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
-	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
-	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
-	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
-	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
-	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
-	"WF P          FFFFFFFFFFFFFFFFFFFFFFFFFW",
-	"WFFFFFWWWWFFFFFWWWWWWWWWWWWWWWWWWWWWWWWW",
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
-};
-
-String static Level2[H] = {
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                                      W",
-	"W                                      W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         WWW          W",
-	"W        0    X    0      WWW          W",
-	"W         FFFFFFFFF       WWW          W",
-	"W       FFFFFFFFFFFF      WWW     E    W",
-	"W P    FFFFFFFFFFFFFF     WWW          W",
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
-};
-
-String static Level3[H] = {
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-	"W                                      W",
-	"W                                      W",
-	"W P                                    W",
-	"WFFFFFFFFFFFFFFFFFFFFFFFFFF  FFFFFFFFFFW",
-	"WFFFFFFFFFFFFFFFFFF   X   X    X     X W",
-	"WFFFFFFFFFFFFFFFFFFFFFFFFFF  FFFFFFFFFFW",
-	"WFFFFFFFFFFFFFFFFFF     X      X   X   W",
-	"WFFFFFFFFFFFFFFFFFFFFFFFFFF  FFFFFFFFFFW",
-	"WFFFFFFFFFFFFFFFFFF  X X  X      X     W",
-	"WFFFFFFFFFFFFFFFFFFFFFFFFFF  FFFFFFFFFFW",
-	"WFFFFFFFFFFFFFFFFFFX   X  X            W",
-	"WFFFFFFFFFFFFFFFFFFFFFFFFFF  FFFFFFFFFFW",
-	"WFFFFFFFFFFFFFFFFFF                    W",
-	"WFFFFFFFFFFFFFFFFFF                E   W",
-	"WFFFFFFFFFFFFFFFFFF                    W",
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
-};
-
-String static Level4[H] = {
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-	"WFFFWWWWWFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFW",
-	"W                                      W",
-	"W                                      W",
-	"W                                 E    W",
-	"W                                      W",
-	"W     FFFFFFFFFFFF     FFFFFFFFFFFFFFFFW",
-	"W     FFFFFFFFFFFF     WFFFFFFFFFFFFFFFW",
-	"W     FFFFFFFFFFFF     WFFFFFFFFFFFFFFFW",
-	"W     FFFFFFFFFFFF     WFFFFFFFFFFFFFFFW",
-	"W     FFFFFFFFFFFF     WFFFFFFFFFFFFFFFW",
-	"W     FFFFFFFFFFFF     WFFFFFFFFFFFFFFFW",
-	"W     FFFFFFFFFFFF     WFFFFFFFFFFFFFFFW",
-	"W     FFFFFFFFFFFF     WFFFFFFFFFFFFFFFW",
-	"W                      WFFFFFFFFFFFFFFFW",
-	"W P          X     X   WFFFFFFFFFFFFFFFW",
-	"WFFFFFFFFFFFFFFFFFWWWWWWFFFFFFFFFFFFFFFW",
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
-};
-
-String static Level5[H] = {
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-	"WFFFFFFFFFFFFFFFFFFFFFFFWWWWWWWWWWWWWWWW",
-	"WFFFFFFFFFFFFFFFFFFFFFFF        E     WW",
-	"WFFWWWFFFWFFFWFFWFWWWWFF              WW",
-	"WFFWFFFFWFWFFWFWFFWFFFFF  FFFFFFFFFFFFFW",
-	"WFFWFFFFWWWFFWWFFFWWWFFF  FFFFFFFFFFFFFW",
-	"WFFWFFFWFFFWFWFWFFWFFFFF  FFFFFFFFFFFFFW",
-	"WFFWWWFWFFFWFWFFWFWWWWFF  FWFFFWWWFWWWFW",
-	"WFFFFFFFFFFFFFFFFFFFFFFF  FWFFFFWFFWFFFW",
-	"WFFFFFFFFFFFFFFFFFFFFFFF  FWFFFFWFFWWFFW",
-	"WFFWWWFFWWWFFFFFFWFFFFFF  FWFFFFWFFWFFFW",
-	"WFFFWFFWFFFFFFFFWFWFFFFF  FWWWFWWWFWWWFW",
-	"WFFFWFFFWWFFFFFFWWWFFFFF  FFFFFFFFFFFFFW",
-	"WFFFWFFFFFWFFFFWFFFWFFFF  FFFFFFFFFFFFFW",
-	"WFFWWWFWWWFFFFFWFFFWFFFF  FFFFFFFFFFFFFW",
-	"W                         WFFFFFFFFFFFFW",
-	"W  P    X X X X X X X X   WFFFFFFFFFFFFW",
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
-};
 #endif // WORLD
 

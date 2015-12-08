@@ -16,19 +16,40 @@ class Player : public IGameObject {
 public:
 
 	Player() = default;
+	
+	// construct a player at a given position
 	Player(Texture &image, int x, int y);
-	void update(float time);
+
+	// update the player's state based on the given elapsed time interval
+	// since the last clock tick
+	virtual void update(float time);
+
+	// handle collisions with other game objects
 	void Collision(int num);
+
+	// make the player walk left at the defined walking speed
 	void moveLeft();
+
+	// increase the vertical velocity of the player in order to jump
 	void jump();
+
+	// make the player walk right at the defined walking speed
 	void moveRight();
+
+	// set the position of this player to the given x and y in pixel coordinates
 	void setPos(float x, float y);
+
+	// move the player back to the starting position of the level
 	void resetPos();
 
+	// represents the number of lives that the player has left before they lose
 	int lives_remaining;
+
+	// represents whether the player is on the ground or not
 	bool onGround;
 
 private:
+	// represents the original position of the player when the level started
 	sf::Vector2i m_original_pos;
 };
 

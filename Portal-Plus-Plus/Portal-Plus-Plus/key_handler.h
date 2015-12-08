@@ -12,6 +12,7 @@ public:
 	GameModel * handleKey();
 
 private:
+	// represents the model that this KeyHandler controls
 	GameModel * m_model;
 };
 
