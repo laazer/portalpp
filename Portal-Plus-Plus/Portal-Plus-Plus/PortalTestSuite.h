@@ -24,12 +24,49 @@ public:
 
 	// Tests for Enemy
 	void testEnemySet(void) {
+		setUp();
+
+		Enemy *enemy = new Enemy();
+		enemy->set(*tileSet, 0, 0);
+		Sprite testSprite = new Sprite();
+		testSprite.setTexture(*tileSet);
+		testSprite.setTextureRect(IntRect(0, 0, 1, 1));
+
+		TS_ASSERT_EQUALS(enemy->sprite, testSprite);
+		TS_ASSERT_EQUALS(enemy->rect, FloatRect(0, 0, 1, 1));
+		TS_ASSERT_EQUALS(enemy->dx, ENEMY_SPEED);
+		TS_ASSERT(enemy->life);
+
+		delete enemy;
+		breakDown();
 	}
 	void testEnemyUpdate(void) {
+		setUp();
 
+		Enemy *enemy = new Enemy();
+		enemy->set(*tileSet, 0, 0);
+
+		float left = enemy->rect.left;
+		enemy->update(1);
+		TS_ASSERT_EQUALS(enemy->rect.left, left + 1 * ENEMY_SPEED);
+
+		left = enemy->rect.left;
+		enemy->update(5);
+		TS_ASSERT_EQUALS(enemy->rect.left, left + 5 * ENEMY_SPEED);
+
+		delete enemy;
+		breakDown();
 	}
 	void testEnemyCollision(void) {
+		setUp();
 
+		Enemy *enemy = new Enemy();
+		enemy->set(*tileSet, 0, 0);
+
+
+
+		delete enemy;
+		breakDown();
 	}
 
 	// Tests for Game Model
@@ -68,19 +105,6 @@ public:
 	void testKeyHandlerHandleKey(void) {
 
 	}
-
-	// Tests for Level View
-	void testLevelViewConstructor1(void) {
-
-	}
-	void testLevelViewConstructor2(void) {
-
-	}
-	void testLevelViewRender(void) {
-
-	}
-
-	// No tests for Main
 
 	// Tests for Mouse Handler
 	void testMouseHandlerConstructor1(void) {
