@@ -96,9 +96,9 @@ void World::initLevels() {
 		"WFFFWWWWWFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFW",
 		"W                                      W",
 		"W                                      W",
-		"W                                 E    W",
 		"W                                      W",
-		"W     FFFFFFFFFFFF     FFFFFFFFFFFFFFFFW",
+		"W                                  E   W",
+		"W     FFFFFFFFFFFF                     W",
 		"W     FFFFFFFFFFFF     WFFFFFFFFFFFFFFFW",
 		"W     FFFFFFFFFFFF     WFFFFFFFFFFFFFFFW",
 		"W     FFFFFFFFFFFF     WFFFFFFFFFFFFFFFW",
@@ -134,6 +134,7 @@ void World::initLevels() {
 		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
 	};
 	m_levels.push_back(Level5);
+
 }
 
 
