@@ -12,6 +12,11 @@ Player::Player(Texture &image, int x, int y)
 	dx = dy = 0;
 	lives_remaining = STARTING_LIVES;
 	m_original_pos = sf::Vector2i(x, y);
+
+}
+
+Player::~Player() {
+
 }
 
 void Player::update(float time)

@@ -2,30 +2,30 @@
 
 String World::TileMap[H] = {
 	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                                      W",
-	"W                                      W",
-	"W                         FFF          W",
-	"W                         FFF          W",
-	"W                         WWW          W",
-	"W        0    X    0      WWW          W",
-	"W         FFFFFFFFF       WWW          W",
-	"W       FFFFFFFFFFFF      WWW     E    W",
-	"W P    FFFFFFFFFFFFFF     WWW          W",
-	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+	"WFFFFFWWWWFFFFFFFFFFFFFFFFFFFFFFFFFFFFFW",
+	"WF                                     W",
+	"WW                                     W",
+	"WW                                     W",
+	"WW                                     W",
+	"WF                              E      W",
+	"WF                                     W",
+	"WF            FFFFFFFFWWWWWWWWWWWWWWWWWW",
+	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
+	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
+	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
+	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
+	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
+	"WF            FFFFFFFFFFFFFFFFFFFFFFFFFW",
+	"WF P          FFFFFFFFFFFFFFFFFFFFFFFFFW",
+	"WFFFFFWWWWFFFFFWWWWWWWWWWWWWWWWWWWWWWWWW",
 	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
 };
 
 std::vector<String*> World::m_levels = std::vector<String*>();
-int World::current_level = 0;
+int World::m_current_level = 0;
 
 void World::initLevels() {
-	String Level1[H] = {
+	String static Level1[H] = {
 		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
 		"WFFFFFWWWWFFFFFFFFFFFFFFFFFFFFFFFFFFFFFW",
 		"WF                                     W",
@@ -139,37 +139,29 @@ void World::initLevels() {
 
 
 void World::setLevel(int level) {
-	for (int i = 0; i < H; ++i) {
-		World::TileMap[i] = m_levels.at(level)[i];
-	}
-	World::current_level = level;
-}
-/*
-void World::updateModel(GameModel * model) {
-	float player_x;
-	float player_y;
-	std::vector<sf::Vector2f> enemy_positions;
-	FloatRect door;
-	for (int i = 0; i < H; i++) {
-		for (int j = 0; j < W; j++)
-		{
-			if (World::TileMap[i][j] == 'X') {
-				enemy_positions.push_back(sf::Vector2f(j * UNIT, i * UNIT));
-			}
-			else if (World::TileMap[i][j] == 'P') {
-				player_x = j * UNIT;
-				player_y = j * UNIT;
-			}
-			else if (World::TileMap[i][j] == 'E') {
-				// set the rectangle of the door to a space just above the floor
-				// where the door contacts the ground
-				door = FloatRect((j + 0.45) * UNIT, (i + 2) * UNIT - 10,
-					UNIT / 10.0, UNIT);
-			}
+	if (level < World::getNumLevels()) {
+		for (int i = 0; i < H; ++i) {
+			World::TileMap[i] = m_levels.at(level)[i];
 		}
 	}
-	std::tuple<float, float, std::vector<sf::Vector2f>, FloatRect> values;
-	values.
-	model->configure(player_x, player_y, enemy_positions, door);
+	World::m_current_level = level;
+	std::cout << "CURRENT LEVEL:  " << World::m_current_level << std::endl;
+	std::cout << "MAX LEVELS:  " << World::getNumLevels() << std::endl;
 }
-*/
+
+void World::setCurrentLevel(int level) {
+	World::m_current_level = level;
+}
+
+int World::getNumLevels() {
+	return World::m_levels.size();
+}
+
+int World::getCurrentLevel() {
+	return World::m_current_level;
+}
+
+bool World::isGameWon() {
+	std::cout << "MADE IT" << std::endl;
+	return World::getCurrentLevel() >= World::getNumLevels();
+}

@@ -11,14 +11,14 @@
 int main()
 {
 
-
-	
 	// redirect cout to point to cout.txt for debugging purposes
 	std::ofstream file;
 	file.open("cout.txt");
 	std::streambuf* sbuf = std::cout.rdbuf();
 	std::cout.rdbuf(file.rdbuf());
 	World::initLevels();
+	sf::Font font;
+	font.loadFromFile(ASSET_DIR + "/font.ttf");
 
 	RenderWindow * window = new RenderWindow(VideoMode(W * UNIT, H * UNIT), "Portal++");
 
@@ -43,10 +43,20 @@ int main()
 	MouseHandler * mouse_handler = new MouseHandler(model);
 	LevelView * view = new LevelView(model, life);
 
+	sf::Music music;
+	music.openFromFile(ASSET_DIR + "/song.ogg");
+	music.play();
+
+	/*
+	SoundBuffer buffer;
+	buffer.loadFromFile("background_song.ogg");
+	Sound sound(buffer);
+	*/
+
 	window->setFramerateLimit(60);
 	bool game_over = false;
 
-	for (int level = 1; level < 5; ++level) {
+	for (int level = 0; level < World::getNumLevels(); ++level) {
 		std::cout << level << std::endl;
 		World::setLevel(level);
 		Player player;
@@ -78,20 +88,13 @@ int main()
 			}
 		}
 
-		
-
-		/** For adding sound
-		SoundBuffer buffer;
-		buffer.loadFromFile("Jump.ogg");
-		Sound sound(buffer);
-		**/
 		Clock clock;
 
 		sf::Sprite crosshair(*tileSet);
 		crosshair.setTextureRect(IntRect(2 * UNIT, 2 * UNIT, UNIT, UNIT));
 
 		*model = GameModel(tileSet, &player, enemies, door);
-		
+
 
 		while (!window->isOpen() && !game_over) {
 			// wait for the window to open to prevent the game loop from
@@ -151,10 +154,6 @@ int main()
 				}
 			}
 
-			if (model->reachedDoor()) {
-				World::setLevel(World::current_level + 1);
-				break;
-			}
 
 			if (player.lives_remaining <= 0) {
 				game_over = true;
@@ -168,17 +167,68 @@ int main()
 			window->draw(crosshair);
 			// display the window
 			window->display();
+
+			if (model->reachedDoor()) {
+				std::cout << World::getCurrentLevel() << std::endl;
+				std::cout << World::getNumLevels() << std::endl;
+				World::setCurrentLevel(World::getCurrentLevel() + 1);
+				if (World::isGameWon()) {
+					game_over = true;
+					std::cout << "WON THE GAME" << std::endl;
+				}
+				World::setLevel(World::getCurrentLevel() + 1);
+				break;
+			}
+
 			if (game_over) {
-				return 0;
+				break;
 			}
 
 		}
-		if (game_over || !window->isOpen()) {
+		if (game_over) {
+			std::cout << World::getCurrentLevel() << std::endl;
+			std::cout << World::getNumLevels() << std::endl;
+			sf::Text message;
+			message.setFont(font);
+			message.setCharacterSize(72);
+			if (World::isGameWon()) {
+				message.setString("YOU WIN!");
+				message.setColor(sf::Color::Green);
+			}
+			else {
+				message.setString("GAME OVER");
+				message.setColor(sf::Color::Red);
+			}
+			message.setPosition(UNIT * W / 2 - 200, UNIT * H / 2 - 80);
+			
+			while (window->isOpen()) {
+				Event event;
+				while (window->pollEvent(event))
+				{
+					if (event.type == Event::Closed) {
+						window->close();
+					}
+				}
+				sf::Vector2i mouse_coords = sf::Mouse::getPosition(*window);
+				crosshair.setPosition(mouse_coords.x, mouse_coords.y);
+				window->clear();
+				window->draw(crosshair);
+				window->draw(message);
+				window->display();
+			}
+			
+
+		}
+		if (!window->isOpen()) {
 			return 0;
 		}
 
-		
+
 	}
+	delete model;
+	delete key_handler;
+	delete mouse_handler;
+	delete view;
 	delete tileSet;
 	delete life;
 	return 0;

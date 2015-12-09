@@ -31,6 +31,9 @@
     <Filter Include="controller">
       <UniqueIdentifier>{8d1d44d4-9301-404c-ad73-db682d6eee9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{4b21c2d5-65ed-40b2-8d2f-40a6c3328159}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,6 +95,12 @@
     <ClInclude Include="mouse_handler.h">
       <Filter>controller</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PortalTestSuite.h">
+      <Filter>tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="target_image.png">
@@ -106,10 +115,18 @@
     <Image Include="..\..\..\test\portalpp\assets\crosshair.png">
       <Filter>assets</Filter>
     </Image>
+    <Image Include="..\assets\SpriteSheet1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\test\portalpp\assets\Jump.ogg">
       <Filter>assets</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Portal-Plus-Plus.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

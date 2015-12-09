@@ -13,5 +13,6 @@ GameModel * MouseHandler::handleMouse(sf::Event &event) {
 	{
 		m_model->launchPortal(event.mouseButton.x, event.mouseButton.y, false);
 	}
+
 	return m_model;
 }

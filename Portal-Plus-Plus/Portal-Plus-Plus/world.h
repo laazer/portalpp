@@ -29,8 +29,17 @@ public:
 	// set the current level
 	static void setLevel(int level);
 
-	// represents the current level number
-	static int current_level;
+	// get the current level number
+	static int getCurrentLevel();
+
+	// set the current level
+	static void setCurrentLevel(int level);
+
+	// get the number of levels to play
+	static int getNumLevels();
+
+	// is the game won?
+	static bool isGameWon();
 
 	// must be called on to create level array vector
 	static void initLevels();
@@ -39,6 +48,9 @@ public:
 	//static void updateModel(GameModel * model);
 
 private:
+	// represents the current level number
+	static int m_current_level;
+
 	static std::vector<String*> m_levels;
 };
 

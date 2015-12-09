@@ -20,6 +20,8 @@ public:
 	// construct a player at a given position
 	Player(Texture &image, int x, int y);
 
+	~Player();
+
 	// update the player's state based on the given elapsed time interval
 	// since the last clock tick
 	virtual void update(float time);
@@ -51,6 +53,7 @@ public:
 private:
 	// represents the original position of the player when the level started
 	sf::Vector2i m_original_pos;
+
 };
 
 
