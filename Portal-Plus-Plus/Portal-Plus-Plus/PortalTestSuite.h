@@ -12,6 +12,16 @@
 
 class PortalTestSuite : public CxxTest::TestSuite {
 public:
+    Texture * tileSet;
+    void setUp() {
+        tileSet = new Texture();
+        tileSet->loadFromFile(ASSET_DIR + "/SpriteSheet1.png");
+    }
+
+    void breakDown() {
+        delete tileSet;
+    }
+
 	// Tests for Enemy
 	void testEnemySet(void) {
 	}
@@ -45,14 +55,6 @@ public:
 
 	}
 	void testGameModelGetPlayer(void) {
-
-	}
-
-	// Tests for Game Object
-	void testGameObjectMoveX(void) {
-
-	}
-	void testGameObjectMoveY(void) {
 
 	}
 
@@ -93,22 +95,65 @@ public:
 
 	// Tests for Player
 	void testPlayerConstructor(void) {
-
+        setUp();
+        Player * testp = new Player(*tileSet, 0, 0);
+        TS_ASSERT(testp != NULL);
+        TS_ASSERT(testp->lives_remaining = STARTING_LIVES);
+        delete testp;
+        breakDown();
 	}
 	void testPlayerUpdate(void) {
-
+        setUp();
+        Player * testp = new Player(*tileSet, 0, 0);
+        testp->update(1);
+        TS_ASSERT(testp->onGround);
+        testp->jump();
+        TS_ASSERT(!testp->onGround);
+        delete testp;
+        breakDown();
 	}
 	void testPlayerCollision(void) {
-
+        setUp();
+        Player * testp = new Player(*tileSet, 0, 0);
+        testp->dx = 10;
+        testp->dy = 10;
+        testp->Collision(0);
+        testp->setPos(15 * UNIT, testp->rect.top);
+        testp->jump();
+        testp->Collision(1);
+        delete testp;
+        breakDown();
 	}
 	void testPlayerMoveLeft(void) {
-
+        setUp();
+        Player * testp = new Player(*tileSet, 0, 0);
+        TS_ASSERT(testp->dx == 0);
+        testp->moveLeft();
+        TS_ASSERT(testp->dx < 0);
+        testp->jump();
+        TS_ASSERT(testp->dx < 0);
+        delete testp;
+        breakDown();
 	}
 	void testPlayerJump(void) {
-
+        setUp();
+        Player * testp = new Player(*tileSet, 0, 0);
+        TS_ASSERT(testp->onGround);
+        testp->jump();
+        TS_ASSERT(!testp->onGround);
+        delete testp;
+        breakDown();
 	}
 	void testPlayerMoveRight(void) {
-
+        setUp();
+        Player * testp = new Player(*tileSet, 0, 0);
+        TS_ASSERT(testp->dx == 0);
+        testp->moveLeft();
+        TS_ASSERT(testp->dx > 0);
+        testp->jump();
+        TS_ASSERT(testp->dx > 0);
+        delete testp;
+        breakDown();
 	}
 
 	// Tests for Portal
@@ -125,30 +170,5 @@ public:
 
 	}
 
-	// Tests for Velocity
-	void testVelocityConstructor1(void) {
-
-	}
-	void testVelocityConstructor2(void) {
-
-	}
-	void testVelocityGetMagnitude(void) {
-
-	}
-	void testVelocityGetX(void) {
-
-	}
-	void testVelocityGetY(void) {
-
-	}
-	void testVelocitySetX(void) {
-
-	}
-	void testVelocitySetY(void) {
-
-	}
-	void testVelocityAssignment(void) {
-
-	}
 	// No tests for World
 };
