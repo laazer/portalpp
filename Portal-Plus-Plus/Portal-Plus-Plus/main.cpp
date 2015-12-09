@@ -8,6 +8,7 @@
 #include "mouse_handler.h"
 #include "level_view.h"
 
+
 int main()
 {
 
@@ -16,14 +17,20 @@ int main()
 	file.open("cout.txt");
 	std::streambuf* sbuf = std::cout.rdbuf();
 	std::cout.rdbuf(file.rdbuf());
+
+	// initialize the static vector of levels
 	World::initLevels();
+
+	// load the font for rendering game over screens
 	sf::Font font;
 	font.loadFromFile(ASSET_DIR + "/font.ttf");
 
+	// configure rendering window
 	RenderWindow * window = new RenderWindow(VideoMode(W * UNIT, H * UNIT), "Portal++");
-
 	window->setMouseCursorVisible(false);
+	window->setFramerateLimit(60);
 
+	// load textures from files for displaying graphics
 	Texture * tileSet = new Texture();
 	tileSet->loadFromFile(ASSET_DIR + "/SpriteSheet1.png");
 
@@ -36,35 +43,42 @@ int main()
 	Sprite * life = new Sprite(*tileSet);
 	life->setTextureRect(IntRect(3 + UNIT * 2, 13 + UNIT * 7, UNIT, UNIT));
 
+	sf::Sprite * crosshair = new sf::Sprite(*tileSet);
+	crosshair->setTextureRect(IntRect(2 * UNIT, 2 * UNIT, UNIT, UNIT));
+
+	// seed random generator used for determining direction of spawned enemies
 	srand(time(NULL));
 
+	// dynamically allocate model, view, and controller
 	GameModel * model = new GameModel();
 	KeyHandler * key_handler = new KeyHandler(model);
 	MouseHandler * mouse_handler = new MouseHandler(model);
 	LevelView * view = new LevelView(model, life);
 
+
+	// start playing the background music
 	sf::Music music;
 	music.openFromFile(ASSET_DIR + "/song.ogg");
 	music.play();
 
-	/*
-	SoundBuffer buffer;
-	buffer.loadFromFile("background_song.ogg");
-	Sound sound(buffer);
-	*/
 
-	window->setFramerateLimit(60);
+
 	bool game_over = false;
 
+	// run each of the levels while the player is still alive
 	for (int level = 0; level < World::getNumLevels(); ++level) {
-		std::cout << level << std::endl;
+		
+		// create new components for this level
 		World::setLevel(level);
 		Player player;
 		std::vector<Enemy*> enemies;
 		FloatRect door;
+
+		// set the locations of the components based on their spot in the level map
 		for (int i = 0; i < H; i++) {
 			for (int j = 0; j < W; j++)
 			{
+				// found enemy
 				if (World::TileMap[i][j] == 'X') {
 					Enemy *enemy = new Enemy();
 					enemy->set(*tileSet, j * UNIT, i * UNIT);
@@ -73,9 +87,11 @@ int main()
 						enemy->dx *= -1;
 					}
 				}
+				// found player
 				else if (World::TileMap[i][j] == 'P') {
 					player = Player(*tileSet, j * UNIT, i * UNIT);
 				}
+				// found exit door
 				else if (World::TileMap[i][j] == 'E') {
 					// set the rectangle of the door to a space just above the floor
 					// where the door contacts the ground
@@ -88,10 +104,9 @@ int main()
 			}
 		}
 
+		// clock used for tracking time intervals between main loop cycles
 		Clock clock;
-
-		sf::Sprite crosshair(*tileSet);
-		crosshair.setTextureRect(IntRect(2 * UNIT, 2 * UNIT, UNIT, UNIT));
+		
 
 		*model = GameModel(tileSet, &player, enemies, door);
 
@@ -101,11 +116,12 @@ int main()
 			// being skipped
 		}
 
+		// loop through the game until it the level is over or the window closes
 		while (window->isOpen())
 		{
 			// set the position of the crosshair based on the mosue position
 			sf::Vector2i mouse_coords = sf::Mouse::getPosition(*window);
-			crosshair.setPosition(mouse_coords.x, mouse_coords.y);
+			crosshair->setPosition(mouse_coords.x, mouse_coords.y);
 
 			// get the clock time that has elapsed since the last clock tick to account for
 			// any missed frames
@@ -114,6 +130,7 @@ int main()
 
 			time = time / 500;
 
+			// don't skip too many frames at once
 			if (time > 20) {
 				time = 20;
 			}
@@ -154,7 +171,7 @@ int main()
 				}
 			}
 
-
+			// has the player lost the game?
 			if (player.lives_remaining <= 0) {
 				game_over = true;
 				player.sprite.setColor(Color::Red);
@@ -164,10 +181,11 @@ int main()
 			// render the game objects on top of the level
 			view->render(window);
 			// draw the crosshair at the current mouse location
-			window->draw(crosshair);
+			window->draw(*crosshair);
 			// display the window
 			window->display();
 
+			// has the player beaten the current level?
 			if (model->reachedDoor()) {
 				std::cout << World::getCurrentLevel() << std::endl;
 				std::cout << World::getNumLevels() << std::endl;
@@ -185,6 +203,7 @@ int main()
 			}
 
 		}
+		// display the final message screen
 		if (game_over) {
 			std::cout << World::getCurrentLevel() << std::endl;
 			std::cout << World::getNumLevels() << std::endl;
@@ -210,9 +229,9 @@ int main()
 					}
 				}
 				sf::Vector2i mouse_coords = sf::Mouse::getPosition(*window);
-				crosshair.setPosition(mouse_coords.x, mouse_coords.y);
+				crosshair->setPosition(mouse_coords.x, mouse_coords.y);
 				window->clear();
-				window->draw(crosshair);
+				window->draw(*crosshair);
 				window->draw(message);
 				window->display();
 			}
@@ -225,12 +244,14 @@ int main()
 
 
 	}
+	// deallocate all objects from the heap
 	delete model;
 	delete key_handler;
 	delete mouse_handler;
 	delete view;
 	delete tileSet;
 	delete life;
+	delete crosshair;
 	return 0;
 }
 

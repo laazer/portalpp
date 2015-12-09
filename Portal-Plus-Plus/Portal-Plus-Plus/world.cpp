@@ -135,6 +135,28 @@ void World::initLevels() {
 	};
 	m_levels.push_back(Level5);
 
+	String static Level6[H] = {
+		"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+		"F                                      F",
+		"F                                      F",
+		"W                                   E  F",
+		"W                                      F",
+		"W                                   FF F",
+		"W  P                                   F",
+		"WFFFFWWWWFFFFFF  FFFFFFFFFFFFF         W",
+		"W                                      W",
+		"W     0    X X 00  X X         0       W",
+		"WFFFFFFFFFFFFFF  FFFFFFFFFFFFFFFWWWWFFFW",
+		"WFFFFFFFWWWWWWW  WWWWWWWWWWWWWWWWWWWWWWW",
+		"WFFFFFFFWWWWWWW  WWWWWWWWWWWWWWWWWWWWWWW",
+		"WFFFFFFFWWWWWWW  WWWWWWWWWWWWWWWWWWWWWWW",
+		"WFFFFFFFWWWWWWW  WWWWWWWWWWWWWWWWWWWWWWW",
+		"WFFFFFFFWWWWWWW  WWWWWWWWWWWWWWWWWWWWWWW",
+		"WFFFFFFFWWWWWWW  WWWWWWWWWWWWWWWWWWWWWWW",
+		"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+	};
+	m_levels.push_back(Level6);
+
 }
 
 
