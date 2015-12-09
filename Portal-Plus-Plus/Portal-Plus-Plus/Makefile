@@ -1,4 +1,6 @@
+
 all: compile link
+
 test: testgen runner
 
 compile: ./*.cpp ./*.h
@@ -11,7 +13,7 @@ testgen: PortalTestSuite.h
 	cxxtestgen --error-printer -o runner.cpp PortalTestSuite.h
 
 runner: runner.cpp
-	g++ runner.cpp -o runner -std=c++11
+	g++ -o runner -I$(CXXTEST) runner.cpp
 
 clean:
 	rm -f ./*.o
