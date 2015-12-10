@@ -27,7 +27,7 @@ public:
 		delete tileSet;
 	}
 
-	/*// Tests for Enemy
+	// Tests for Enemy
 	void testEnemySet(void) {
 		setUp();
 
@@ -83,25 +83,6 @@ public:
 	}
 
 	// Tests for Game Model
-	void testGameModelConstructor(void) {
-		setUp();
-
-		Player * testp = new Player(*tileSet, 0, 0);
-		std::vector<Enemy*> & enemies;
-		FloatRect door;
-		GameModel * model = new GameModel(*tileSet, testp, enemies, door);
-
-		TS_ASSERT_EQUALS(model->m_player, testp);
-		TS_ASSERT_EQUALS(model->m_enemies, enemies);
-		TS_ASSERT_EQUALS(model->m_image, *tileSet);
-		TS_ASSERT_EQUALS(model->m_portal_1, NULL);
-		TS_ASSERT_EQUALS(model->m_portal_2, NULL);
-		TS_ASSERT_EQUALS(model->m_door, door);
-
-		delete testp;
-		delete model;
-		breakDown();
-	}
 	void testGameModelUpdate(void) {
 		setUp();
 
@@ -110,7 +91,9 @@ public:
 		FloatRect door;
 		GameModel * model = new GameModel(*tileSet, testp, enemies, door);
 
-		model->update()
+		model->update(1);
+		const std::vector<IGameObject*> renderObjects = model->getRenderObjects();
+		TS_ASSERT_EQUALS(model->getPlayer(), )
 
 		delete testp;
 		delete model;
@@ -123,31 +106,35 @@ public:
 
 	}
 	void testGameModelGetRenderObjects(void) {
+		setUp();
 
+		Player * testp = new Player(*tileSet, 0, 0);
+		std::vector<Enemy*> & enemies;
+		FloatRect door;
+		GameModel * model = new GameModel(*tileSet, testp, enemies, door);
+		const std::vector<IGameObject*> renderObjects = model->getRenderObjects();
+
+		TS_ASSERT(renderObjects.size() > 0);
+
+		delete testp;
+		delete model;
+		breakDown();
 	}
 	void testGameModelGetPlayer(void) {
+		setUp();
 
+		Player * testp = new Player(*tileSet, 0, 0);
+		std::vector<Enemy*> & enemies;
+		FloatRect door;
+		GameModel * model = new GameModel(*tileSet, testp, enemies, door);
+
+		TS_ASSERT_EQUALS(model->getPlayer, testp);
+
+		delete testp;
+		delete model;
+		breakDown();
 	}
-
-	// Tests for Key Handler
-	void testKeyHandlerConstructor1(void) {
-
-	}
-	void testKeyHandlerConstructor2(void) {
-
-	}
-	void testKeyHandlerHandleKey(void) {
-
-	}
-
-	// Tests for Mouse Handler
-	void testMouseHandlerConstructor1(void) {
-
-	}
-	void testMouseHandlerConstructor2(void) {
-
-	}
-	void testMouseHandlerHandleMouse(void) {
+	void testGameModelReachedDoor(void) {
 
 	}
 
@@ -228,5 +215,5 @@ public:
 
 	}
 
-	// No tests for World*/
+	// No tests for World
 };
