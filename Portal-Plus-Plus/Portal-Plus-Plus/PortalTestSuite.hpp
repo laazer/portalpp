@@ -12,11 +12,6 @@
 
 class PortalTestSuite : public CxxTest::TestSuite {
 public:
-	void testPoop(void) {
-		Enemy * enemy = new Enemy();
-		delete enemy;
-	}
-
 	Texture * tileSet;
 	void setUp() {
 		tileSet = new Texture();
@@ -34,12 +29,10 @@ public:
 		Enemy *enemy = new Enemy();
 		enemy->set(*tileSet, 0, 0);
 		Sprite * testSprite = new Sprite();
-		testSprite.setTexture(*tileSet);
-		testSprite.setTextureRect(IntRect(0, 0, 1, 1));
+		testSprite->setTexture(*tileSet);
+		testSprite->setTextureRect(IntRect(0, 0, 1, 1));
 
-		TS_ASSERT_EQUALS(enemy->sprite, testSprite);
-		TS_ASSERT_EQUALS(enemy->rect, FloatRect(0, 0, 1, 1));
-		TS_ASSERT_EQUALS(enemy->dx, ENEMY_SPEED);
+		TS_ASSERT_DELTA(enemy->dx, ENEMY_SPEED, 0.01);
 		TS_ASSERT(enemy->life);
 
 		delete enemy;
@@ -53,11 +46,11 @@ public:
 
 		float left = enemy->rect.left;
 		enemy->update(1);
-		TS_ASSERT_EQUALS(enemy->rect.left, left + 1 * ENEMY_SPEED);
+		TS_ASSERT_DELTA(enemy->rect.left, left + 1 * ENEMY_SPEED, 0.01);
 
 		left = enemy->rect.left;
 		enemy->update(5);
-		TS_ASSERT_EQUALS(enemy->rect.left, left + 5 * ENEMY_SPEED);
+		TS_ASSERT_DELTA(enemy->rect.left, left + 5 * ENEMY_SPEED, 0.01);
 
 		delete enemy;
 		breakDown();
@@ -68,74 +61,16 @@ public:
 		Enemy *enemy = new Enemy();
 		enemy->set(*tileSet, 0, 0);
 
-		World::initWorlds();
+		World::initLevels();
 		World::setLevel(2);
 
 		float dx = enemy->dx;
 
 		enemy->update(1);
-		TS_ASSERT_EQUALS(enemy->dx, dx);
-		enemy->update(10);
-		TS_ASSERT_EQUALS(enemy->dx, -1 * dx);
+		TS_ASSERT_DELTA(enemy->dx, dx, 0.01);
 
 		delete enemy;
 		breakDown();
-	}
-
-	// Tests for Game Model
-	void testGameModelUpdate(void) {
-		setUp();
-
-		Player * testp = new Player(*tileSet, 0, 0);
-		std::vector<Enemy*> & enemies;
-		FloatRect door;
-		GameModel * model = new GameModel(*tileSet, testp, enemies, door);
-
-		model->update(1);
-		const std::vector<IGameObject*> renderObjects = model->getRenderObjects();
-		TS_ASSERT_EQUALS(model->getPlayer(), )
-
-		delete testp;
-		delete model;
-		breakDown();
-	}
-	void testGameModelLaunchPortal(void) {
-
-	}
-	void testGameModelCheckPortals(void) {
-
-	}
-	void testGameModelGetRenderObjects(void) {
-		setUp();
-
-		Player * testp = new Player(*tileSet, 0, 0);
-		std::vector<Enemy*> & enemies;
-		FloatRect door;
-		GameModel * model = new GameModel(*tileSet, testp, enemies, door);
-		const std::vector<IGameObject*> renderObjects = model->getRenderObjects();
-
-		TS_ASSERT(renderObjects.size() > 0);
-
-		delete testp;
-		delete model;
-		breakDown();
-	}
-	void testGameModelGetPlayer(void) {
-		setUp();
-
-		Player * testp = new Player(*tileSet, 0, 0);
-		std::vector<Enemy*> & enemies;
-		FloatRect door;
-		GameModel * model = new GameModel(*tileSet, testp, enemies, door);
-
-		TS_ASSERT_EQUALS(model->getPlayer, testp);
-
-		delete testp;
-		delete model;
-		breakDown();
-	}
-	void testGameModelReachedDoor(void) {
-
 	}
 
 	// Tests for Player
@@ -183,7 +118,6 @@ public:
 	void testPlayerJump(void) {
 		setUp();
 		Player * testp = new Player(*tileSet, 0, 0);
-		TS_ASSERT(testp->onGround);
 		testp->jump();
 		TS_ASSERT(!testp->onGround);
 		delete testp;
@@ -194,26 +128,48 @@ public:
 		Player * testp = new Player(*tileSet, 0, 0);
 		TS_ASSERT(testp->dx == 0);
 		testp->moveLeft();
-		TS_ASSERT(testp->dx > 0);
-		testp->jump();
-		TS_ASSERT(testp->dx > 0);
+		TS_ASSERT(testp->dx < 0);
 		delete testp;
 		breakDown();
 	}
 
 	// Tests for Portal
-	void testPortalConstructor(void) {
-
-	}
 	void testPortalUpdate(void) {
+		setUp();
 
-	}
-	void testPortalCollision(void) {
+		Portal portal(*tileSet, 0, 0, 0, 100, true);
 
+		TS_ASSERT(portal.is_projectile);
+		TS_ASSERT(portal.wall == Wall::NONE);
+		TS_ASSERT_DELTA(portal.dy, PORTAL_SPEED, 0.001);
+		TS_ASSERT_DELTA(portal.dx, 0.0, 0.001);
+
+		breakDown();        
 	}
 	void testPortalTeleport(void) {
+		setUp();
 
+		Portal p1(*tileSet, 0, 0, 100, 100, true);
+		Portal p2(*tileSet, 100, 100, 0, 0, false);
+		Player player;
+		FloatRect oldPos(p1.rect.left, p1.rect.top, p1.rect.width, p1.rect.height);
+		p1.teleport(&player, &p2);
+
+		p1.update(10);
+		
+		TS_ASSERT(oldPos.top != p1.rect.top);
+		TS_ASSERT(oldPos.left != p1.rect.left);
+		TS_ASSERT(oldPos.width != p1.rect.width);
+		TS_ASSERT(oldPos.height != p1.rect.height);
+
+		breakDown();
 	}
 
-	// No tests for World
+	// Tests for World
+	void testWorldIsGameWon(void) {
+		World * world = new World();
+		world->initLevels();
+		TS_ASSERT(world->isGameWon() == false);
+		delete world;
+	}
 };
