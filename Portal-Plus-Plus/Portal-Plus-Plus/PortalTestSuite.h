@@ -110,7 +110,7 @@ public:
 		FloatRect door;
 		GameModel * model = new GameModel(*tileSet, testp, enemies, door);
 
-		model->update()
+        model->update();
 
 		delete testp;
 		delete model;
@@ -216,16 +216,37 @@ public:
 
 	// Tests for Portal
 	void testPortalConstructor(void) {
-
+        setUp();
+        Portal * testp = new Portal(*tileSet, 0, 0, 1, 1, true);
+        Portal * testp2 = new Portal(*tileSet, 0, 0, 1, 1, false);
+        TS_ASSERT(testp != NULL);
+        TS_ASSERT(testp2 != NULL);
+        TS_ASSERT(testp->dx == 1 * PORTAL_SPEED);
+        TS_ASSERT(testp2->dx == 1 * PORTAL_SPEED);
+        delete testp;
+        delete testp2;
+        breakDown();
 	}
 	void testPortalUpdate(void) {
-
+        setUp();
+        Portal * testp = new Portal(*tileSet, 0, 0, 1, 1, true);
+        testp->update(1);
+        TS_ASSERT(testp->rect.top == 14 + (1 * PORTAL_SPEED));
+        delete testp;
+        breakDown();
 	}
 	void testPortalCollision(void) {
 
 	}
 	void testPortalTeleport(void) {
-
+        setUp();
+        Player * testpl = new Player(*tileSet, 0, 0);
+        Portal * testp = new Portal(*tileSet, 0, 0, 1, 1, true);
+        Portal * testp2 = new Portal(*tileSet, 0, 0, 1, 1, false);
+        testp->teleport(testpl, testp);
+        delete testp;
+        delete testpl;
+        breakDown();
 	}
 
 	// No tests for World
