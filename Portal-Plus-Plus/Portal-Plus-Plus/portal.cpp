@@ -74,23 +74,23 @@ void Portal::teleport(Player * player, Portal * to_portal) {
 	// fix the signs of the new velocities
 	if (to_portal_wall == TOP) {
 		new_y_vel = new_y_vel > 0 ? new_y_vel : -new_y_vel;
-		new_top = to_portal->rect.top + PORTAL_WIDTH + 2;
+		new_top = to_portal->rect.top + PORTAL_WIDTH + 10;
 		new_left = to_portal->rect.left + PORTAL_HEIGHT / 2;
 	}
 	else if (to_portal_wall == BOTTOM) {
 		new_y_vel = new_y_vel < 0 ? new_y_vel : -new_y_vel;
-		new_top = to_portal->rect.top - PORTAL_WIDTH - player->rect.height - 2;
+		new_top = to_portal->rect.top - PORTAL_WIDTH - player->rect.height - 10;
 		new_left = to_portal->rect.left + PORTAL_HEIGHT / 2;
 	}
 	else if (to_portal_wall == LEFT) {
 		new_x_vel = new_x_vel > 0 ? new_x_vel : -new_x_vel;
 		new_top = to_portal->rect.top + PORTAL_HEIGHT / 2;
-		new_left = to_portal->rect.left + PORTAL_WIDTH + 2;
+		new_left = to_portal->rect.left + PORTAL_WIDTH + 10;
 	}
 	else if (to_portal_wall == RIGHT) {
 		new_x_vel = new_x_vel < 0 ? new_x_vel : -new_x_vel;
 		new_top = to_portal->rect.top + PORTAL_HEIGHT / 2;
-		new_left = to_portal->rect.left - PORTAL_WIDTH - player->rect.width - 2;
+		new_left = to_portal->rect.left - PORTAL_WIDTH - player->rect.width - 10;
 	}
 
 	// change the location of the given player
@@ -137,7 +137,7 @@ void Portal::Collision() {
 			IntRect(0, 5 * UNIT + 12, UNIT, UNIT * 2));
 		sprite.setRotation(90);
 		sprite.move(PORTAL_HEIGHT / 2, 0);
-		rect.height = PORTAL_WIDTH;
+		rect.height = PORTAL_WIDTH + 10;
 		rect.width = PORTAL_HEIGHT;
 		rect.left -= PORTAL_HEIGHT / 2;
 	}
@@ -152,6 +152,7 @@ void Portal::Collision() {
 		sprite.move(PORTAL_HEIGHT / 2, 0);
 		rect.height = PORTAL_WIDTH;
 		rect.width = PORTAL_HEIGHT;
+		rect.top -= 10;
 		rect.left -= PORTAL_HEIGHT / 2;
 	}
 	else if (top_left && bottom_left) {
