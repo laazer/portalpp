@@ -11,7 +11,7 @@ GameModel::GameModel(Texture * image, Player * player,
 }
 
 GameModel::~GameModel() {
-
+	
 }
 
 Player * GameModel::getPlayer() {
