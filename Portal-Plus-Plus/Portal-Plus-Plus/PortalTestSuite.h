@@ -107,7 +107,11 @@ public:
 		FloatRect door;
 		GameModel * model = new GameModel(*tileSet, testp, enemies, door);
 
+<<<<<<< HEAD
 		model->update(1);
+=======
+        model->update();
+>>>>>>> b405e061c81e889831c26a08e8e16f91d230ef51
 
 		delete testp;
 		delete model;
@@ -192,9 +196,19 @@ public:
 
 	// Tests for Portal
 	void testPortalConstructor(void) {
-
+        setUp();
+        Portal * testp = new Portal(*tileSet, 0, 0, 1, 1, true);
+        Portal * testp2 = new Portal(*tileSet, 0, 0, 1, 1, false);
+        TS_ASSERT(testp != NULL);
+        TS_ASSERT(testp2 != NULL);
+        TS_ASSERT(testp->dx == 1 * PORTAL_SPEED);
+        TS_ASSERT(testp2->dx == 1 * PORTAL_SPEED);
+        delete testp;
+        delete testp2;
+        breakDown();
 	}
 	void testPortalUpdate(void) {
+<<<<<<< HEAD
 		setUp();
 		Portal portal(*tileSet, 0, 0, 0, 100, true);
 		TS_ASSERT(portal.is_projectile);
@@ -209,9 +223,18 @@ public:
 		TS_ASSERT_DELTA(portal.dx, PORTAL_SPEED / 2, 0.001);
 		breakDown();
 
+=======
+        setUp();
+        Portal * testp = new Portal(*tileSet, 0, 0, 1, 1, true);
+        testp->update(1);
+        TS_ASSERT(testp->rect.top == 14 + (1 * PORTAL_SPEED));
+        delete testp;
+        breakDown();
+>>>>>>> b405e061c81e889831c26a08e8e16f91d230ef51
 	}
 
 	void testPortalTeleport(void) {
+<<<<<<< HEAD
 		setUp();
 		Portal p1(*tileSet, 0, 0, 100, 100, true);
 		Portal p2(*tileSet, 100, 100, 0, 0, false);
@@ -224,6 +247,16 @@ public:
 		TS_ASSERT(oldPos.height != p1.rect.height);
 		breakDown();
 
+=======
+        setUp();
+        Player * testpl = new Player(*tileSet, 0, 0);
+        Portal * testp = new Portal(*tileSet, 0, 0, 1, 1, true);
+        Portal * testp2 = new Portal(*tileSet, 0, 0, 1, 1, false);
+        testp->teleport(testpl, testp);
+        delete testp;
+        delete testpl;
+        breakDown();
+>>>>>>> b405e061c81e889831c26a08e8e16f91d230ef51
 	}
 
 	// No tests for World
