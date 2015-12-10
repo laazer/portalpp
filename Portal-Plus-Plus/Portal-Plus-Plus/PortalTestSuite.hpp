@@ -27,7 +27,7 @@ public:
 		delete tileSet;
 	}
 
-	// Tests for Enemy
+	/*// Tests for Enemy
 	void testEnemySet(void) {
 		setUp();
 
@@ -228,5 +228,5 @@ public:
 
 	}
 
-	// No tests for World
+	// No tests for World*/
 };

@@ -1,6 +1,5 @@
 all: compile link
-
-test: testgen runner
+test: testgen compile runner
 
 compile: ./*.cpp ./*.h
 	g++ -c ./*.cpp ./*.h -std=c++11
@@ -11,8 +10,9 @@ link: ./*.o
 testgen: PortalTestSuite.h
 	cxxtestgen --error-printer -o runner.cpp PortalTestSuite.h
 
-runner: runner.cpp
-	g++ -o runner runner.cpp -std=c++11 -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+runner: ./*.o
+	rm -f main.o
+	g++ ./*.o -o runner -I$CXXTEST -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
 clean:
 	rm -f ./*.o
