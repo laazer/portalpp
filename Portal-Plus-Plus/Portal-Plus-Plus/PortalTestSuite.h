@@ -12,10 +12,7 @@
 
 class PortalTestSuite : public CxxTest::TestSuite {
 public:
-	void testPoop(void) {
-		Enemy * enemy = new Enemy();
-		delete enemy;
-	}
+
 
 	Texture * tileSet;
 	void setUp() {
@@ -34,8 +31,8 @@ public:
 		Enemy *enemy = new Enemy();
 		enemy->set(*tileSet, 0, 0);
 		Sprite * testSprite = new Sprite();
-		testSprite.setTexture(*tileSet);
-		testSprite.setTextureRect(IntRect(0, 0, 1, 1));
+		testSprite->setTexture(*tileSet);
+		testSprite->setTextureRect(IntRect(0, 0, 1, 1));
 
 		TS_ASSERT_EQUALS(enemy->sprite, testSprite);
 		TS_ASSERT_EQUALS(enemy->rect, FloatRect(0, 0, 1, 1));
@@ -87,7 +84,7 @@ public:
 		setUp();
 
 		Player * testp = new Player(*tileSet, 0, 0);
-		std::vector<Enemy*> & enemies;
+		std::vector<Enemy*> enemies;
 		FloatRect door;
 		GameModel * model = new GameModel(*tileSet, testp, enemies, door);
 
@@ -110,7 +107,7 @@ public:
 		FloatRect door;
 		GameModel * model = new GameModel(*tileSet, testp, enemies, door);
 
-		model->update()
+		model->update(1);
 
 		delete testp;
 		delete model;
@@ -129,27 +126,6 @@ public:
 
 	}
 
-	// Tests for Key Handler
-	void testKeyHandlerConstructor1(void) {
-
-	}
-	void testKeyHandlerConstructor2(void) {
-
-	}
-	void testKeyHandlerHandleKey(void) {
-
-	}
-
-	// Tests for Mouse Handler
-	void testMouseHandlerConstructor1(void) {
-
-	}
-	void testMouseHandlerConstructor2(void) {
-
-	}
-	void testMouseHandlerHandleMouse(void) {
-
-	}
 
 	// Tests for Player
 	void testPlayerConstructor(void) {
@@ -219,12 +195,34 @@ public:
 
 	}
 	void testPortalUpdate(void) {
+		setUp();
+		Portal portal(*tileSet, 0, 0, 0, 100, true);
+		TS_ASSERT(portal.is_projectile);
+		TS_ASSERT(portal.wall == Wall::NONE);
+		TS_ASSERT_DELTA(portal.dy, PORTAL_SPEED, 0.001);
+		TS_ASSERT_DELTA(portal.dx, 0.0, 0.001);
+
+		Portal portal2(*tileSet, 0, 0, 100, 100, false);
+		TS_ASSERT(portal.is_projectile);
+		TS_ASSERT(portal.wall == Wall::NONE);
+		TS_ASSERT_DELTA(portal.dy, PORTAL_SPEED / 2, 0.001);
+		TS_ASSERT_DELTA(portal.dx, PORTAL_SPEED / 2, 0.001);
+		breakDown();
 
 	}
-	void testPortalCollision(void) {
 
-	}
 	void testPortalTeleport(void) {
+		setUp();
+		Portal p1(*tileSet, 0, 0, 100, 100, true);
+		Portal p2(*tileSet, 100, 100, 0, 0, false);
+		Player player;
+		FloatRect oldPos(p1.rect.left, p1.rect.top, p1.rect.width, p1.rect.height);
+		p1.teleport(&player, &p2);
+		TS_ASSERT(oldPos.top != p1.rect.top);
+		TS_ASSERT(oldPos.left != p1.rect.left);
+		TS_ASSERT(oldPos.width != p1.rect.width);
+		TS_ASSERT(oldPos.height != p1.rect.height);
+		breakDown();
 
 	}
 
